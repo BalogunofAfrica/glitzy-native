@@ -16,8 +16,7 @@
     "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags",
     "test": "jest --no-watchman",
-    "test:snapshot": "yarn test -u",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
+    "test:snapshot": "yarn test -u"
   },
   "jest": {
     "preset": "jest-expo",
@@ -67,7 +66,6 @@
     "babel-jest": "^29.7.0",
     "babel-preset-expo": "^10.0.1",
     "claudia": "^5.14.1",
-    "coveralls": "^3.1.1",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
