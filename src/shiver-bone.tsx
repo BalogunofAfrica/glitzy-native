@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, ViewStyle } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Animated, {
   interpolate,
   useAnimatedStyle,
@@ -31,7 +30,7 @@ export function ShiverBone({
   boneWidth,
   highlightColor,
   layoutStyle,
-  LinearGradientComponent = LinearGradient,
+  LinearGradientComponent,
   positionRange,
 }: ShiverBoneProps) {
   const animatedStyle = useAnimatedStyle<any>(() => {

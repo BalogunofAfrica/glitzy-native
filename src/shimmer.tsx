@@ -1,6 +1,5 @@
 import React, { Children, memo, useEffect } from 'react';
 import { View, ViewStyle } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import {
   useSharedValue,
   withRepeat,
@@ -27,7 +26,7 @@ const container$ = {
 } satisfies ViewStyle;
 
 const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
-  LinearGradientComponent = LinearGradient,
+  LinearGradientComponent,
   containerStyle = container$,
   easing = DEFAULT_EASING,
   duration = DEFAULT_DURATION,
@@ -39,7 +38,11 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
   highlightColor = DEFAULT_HIGHLIGHT_COLOR,
   children,
 }) => {
-  if (!LinearGradientComponent) {
+  const GradientComponent =
+    LinearGradientComponent ||
+    // eslint-disable-next-line unicorn/prefer-module, @typescript-eslint/no-var-requires
+    require('react-native-linear-gradient').LinearGradient;
+  if (!GradientComponent) {
     throw new Error(
       "Error: 'react-native-linear-gradient' is not installed and no 'LinearGradientComponent' was provided.",
     );
@@ -155,7 +158,7 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
         }
         return (
           <ShiverBone
-            LinearGradientComponent={LinearGradientComponent}
+            LinearGradientComponent={GradientComponent}
             key={prefix ? `${prefix}_${index}` : index}
             {...{
               animationDirection,
@@ -194,7 +197,7 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
 
       return (
         <ShiverBone
-          LinearGradientComponent={LinearGradientComponent}
+          LinearGradientComponent={GradientComponent}
           key={prefix ? `${prefix}_${index}` : index}
           {...{
             animationDirection,
