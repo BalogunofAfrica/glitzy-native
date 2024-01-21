@@ -11,15 +11,16 @@
     "build": "tsc -p tsconfig.json",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
-    "prepare": "npm run build",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "prepare": "yarn build",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags",
     "test": "jest --no-watchman",
+    "test:snapshot": "yarn test -u",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "jest": {
-    "preset": "react-native",
+    "preset": "jest-expo",
     "setupFiles": [
       "./setup-test.js"
     ],
@@ -71,14 +72,16 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unicorn": "^47.0.0",
+    "expo": "^50.0.2",
     "jest": "^29.7.0",
+    "jest-expo": "^50.0.1",
     "prettier": "^3.2.4",
     "react": "^18.2.0",
     "react-native": "^0.73.2",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "^2.1.0",
-    "react-test-renderer": "^16.13.1",
+    "react-test-renderer": "^18.2.0",
     "typescript": "~5.0.0"
   },
   "author": "Abdulmumin Usman",

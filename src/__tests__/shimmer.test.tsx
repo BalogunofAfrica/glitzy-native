@@ -1,28 +1,32 @@
 // @ts-nocheck
-import { Text } from 'react-native';
 import React from 'react';
+import { Text } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 import LinearGradient from 'react-native-linear-gradient';
 import { create } from 'react-test-renderer';
 
+import { Shimmer } from '../shimmer';
 import {
-  ISkeletonContentProps,
   DEFAULT_BONE_COLOR,
+  DEFAULT_BORDER_RADIUS,
   DEFAULT_HIGHLIGHT_COLOR,
-  DEFAULT_BORDER_RADIUS
 } from '../constants';
-import { SkeletonContent } from '../skeleton-content';
+import { ShimmerProps } from '../types';
 
 const staticStyles = {
   borderRadius: DEFAULT_BORDER_RADIUS,
   overflow: 'hidden',
-  backgroundColor: DEFAULT_BONE_COLOR
+  backgroundColor: DEFAULT_BONE_COLOR,
 };
 
-describe('SkeletonComponent test suite', () => {
+function isEmptyObject(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+
+describe('Shimmer Component test suite', () => {
   it('should render empty alone', () => {
-    const tree = create(<SkeletonContent isLoading={false} />).toJSON();
+    const tree = create(<Shimmer isLoading={false} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -31,21 +35,21 @@ describe('SkeletonComponent test suite', () => {
       {
         width: 240,
         height: 100,
-        marginBottom: 10
+        marginBottom: 10,
       },
       {
         width: 180,
         height: 40,
         borderRadius: 20,
-        backgroundColor: 'grey'
-      }
+        backgroundColor: 'grey',
+      },
     ];
-    const props: ISkeletonContentProps = {
+    const props: ShimmerProps = {
       layout,
       isLoading: true,
-      animationType: 'none'
+      animationType: 'none',
     };
-    const instance = create(<SkeletonContent {...props} />);
+    const instance = create(<Shimmer {...props} />);
     const component = instance.root;
     const bones = component.findAllByType(Animated.View);
 
@@ -54,13 +58,15 @@ describe('SkeletonComponent test suite', () => {
     expect(bones[0].props.style).toEqual({
       alignItems: 'center',
       flex: 1,
-      justifyContent: 'center'
+      justifyContent: 'center',
     });
     // default props that are not set
-    expect(bones[1].props.style).toEqual([{ ...layout[0], ...staticStyles }]);
-    expect(bones[2].props.style).toEqual([
-      { overflow: 'hidden', ...layout[1] }
-    ]);
+    expect(bones[1].props.style.filter((node) => !isEmptyObject(node))).toEqual(
+      [{ ...layout[0], ...staticStyles }],
+    );
+    expect(bones[2].props.style.filter((node) => !isEmptyObject(node))).toEqual(
+      [{ overflow: 'hidden', ...layout[1] }],
+    );
     expect(instance.toJSON()).toMatchSnapshot();
   });
 
@@ -68,16 +74,16 @@ describe('SkeletonComponent test suite', () => {
     const w1 = { width: 240, height: 100, marginBottom: 10 };
     const w2 = { width: 180, height: 40 };
     const layout = [w1, w2];
-    const props: ISkeletonContentProps = {
+    const props: ShimmerProps = {
       layout,
       isLoading: true,
-      animationType: 'shiver'
+      animationType: 'shiver',
     };
     const childStyle = { fontSize: 24 };
     const instance = create(
-      <SkeletonContent {...props}>
+      <Shimmer {...props}>
         <Text style={childStyle} />
-      </SkeletonContent>
+      </Shimmer>,
     );
     const component = instance.root;
     let bones = component.findAllByType(LinearGradient);
@@ -86,11 +92,11 @@ describe('SkeletonComponent test suite', () => {
     bones = component.findAllByType(Animated.View);
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
-      ...w1
+      ...w1,
     });
     expect(bones[3].props.style).toEqual({
       ...staticStyles,
-      ...w2
+      ...w2,
     });
     let children = component.findAllByType(Text);
     // no child since it's loading
@@ -98,9 +104,9 @@ describe('SkeletonComponent test suite', () => {
 
     // update props
     instance.update(
-      <SkeletonContent {...props} isLoading={false}>
+      <Shimmer {...props} isLoading={false}>
         <Text style={childStyle} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     bones = instance.root.findAllByType(LinearGradient);
@@ -112,9 +118,9 @@ describe('SkeletonComponent test suite', () => {
 
     // re-update to loading state
     instance.update(
-      <SkeletonContent {...props}>
+      <Shimmer {...props}>
         <Text style={childStyle} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     bones = instance.root.findAllByType(LinearGradient);
@@ -122,11 +128,11 @@ describe('SkeletonComponent test suite', () => {
     bones = component.findAllByType(Animated.View);
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
-      ...w1
+      ...w1,
     });
     expect(bones[3].props.style).toEqual({
       ...staticStyles,
-      ...w2
+      ...w2,
     });
     children = instance.root.findAllByType(Text);
     // no child since it's loading
@@ -145,27 +151,27 @@ describe('SkeletonComponent test suite', () => {
         children: [
           {
             width: 200,
-            height: 120
+            height: 120,
           },
           {
             width: 180,
-            height: 100
-          }
-        ]
+            height: 100,
+          },
+        ],
       },
       {
         width: 180,
         height: 40,
         borderRadius: 20,
-        backgroundColor: 'grey'
-      }
+        backgroundColor: 'grey',
+      },
     ];
-    const props: ISkeletonContentProps = {
+    const props: ShimmerProps = {
       layout,
       isLoading: true,
-      animationType: 'shiver'
+      animationType: 'shiver',
     };
-    const instance = create(<SkeletonContent {...props} />);
+    const instance = create(<Shimmer {...props} />);
     const component = instance.root;
     let bones = component.findAllByType(LinearGradient);
     // three overall bones
@@ -175,20 +181,20 @@ describe('SkeletonComponent test suite', () => {
     expect(bones[1].props.style).toEqual({
       flexDirection: 'row',
       width: 320,
-      height: 300
+      height: 300,
     });
     // testing that styles for nested layout and last child persist
     expect(bones[2].props.style).toEqual({
       ...staticStyles,
-      ...layout[0].children[0]
+      ...layout[0].children[0],
     });
     expect(bones[4].props.style).toEqual({
       ...staticStyles,
-      ...layout[0].children[1]
+      ...layout[0].children[1],
     });
     expect(bones[6].props.style).toEqual({
       ...staticStyles,
-      ...layout[1]
+      ...layout[1],
     });
     expect(instance.toJSON()).toMatchSnapshot();
   });
@@ -198,28 +204,28 @@ describe('SkeletonComponent test suite', () => {
     const parentWidth = 320;
     const containerStyle = {
       width: parentWidth,
-      height: parentHeight
+      height: parentHeight,
     };
     const layout = [
       {
         width: '20%',
         height: '50%',
         borderRadius: 20,
-        backgroundColor: 'grey'
+        backgroundColor: 'grey',
       },
       {
         width: '50%',
         height: '10%',
-        borderRadius: 10
-      }
+        borderRadius: 10,
+      },
     ];
-    const props: ISkeletonContentProps = {
+    const props: ShimmerProps = {
       layout,
       isLoading: true,
       animationType: 'shiver',
-      containerStyle
+      containerStyle,
     };
-    const instance = create(<SkeletonContent {...props} />);
+    const instance = create(<Shimmer {...props} />);
     const component = instance.root;
     let bones = component.findAllByType(LinearGradient);
 
@@ -229,31 +235,31 @@ describe('SkeletonComponent test suite', () => {
     // testing that styles of childs corresponds to percentages
     expect(bones[1].props.style).toEqual({
       ...staticStyles,
-      ...layout[0]
+      ...layout[0],
     });
     expect(bones[3].props.style).toEqual({
       ...staticStyles,
-      ...layout[1]
+      ...layout[1],
     });
     expect(instance.toJSON()).toMatchSnapshot();
   });
 
   it('should have the correct gradient properties', () => {
-    let customProps: ISkeletonContentProps = {
+    let customProps: ShimmerProps = {
       layout: [
         {
           width: 240,
           height: 100,
-          marginBottom: 10
-        }
+          marginBottom: 10,
+        },
       ],
       isLoading: true,
-      animationDirection: 'diagonalDownLeft'
+      animationDirection: 'diagonalDownLeft',
     };
-    const TestComponent = (props: ISkeletonContentProps) => (
-      <SkeletonContent {...props}>
+    const TestComponent = (props: ShimmerProps) => (
+      <Shimmer {...props}>
         <Animated.View style={{ height: 100, width: 200 }} />
-      </SkeletonContent>
+      </Shimmer>
     );
     const component = create(<TestComponent {...customProps} />);
     let gradient = component.root.findByType(LinearGradient);
@@ -267,14 +273,14 @@ describe('SkeletonComponent test suite', () => {
       layout: [
         {
           width: 240,
-          height: 300
-        }
-      ]
+          height: 300,
+        },
+      ],
     };
     component.update(
-      <SkeletonContent {...customProps} animationDirection="diagonalDownLeft">
+      <Shimmer {...customProps} animationDirection="diagonalDownLeft">
         <Animated.View style={{ height: 300, width: 200 }} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     gradient = component.root.findByType(LinearGradient);
@@ -283,9 +289,9 @@ describe('SkeletonComponent test suite', () => {
     expect(gradient.props.end).toEqual({ x: 1, y: 0 });
 
     component.update(
-      <SkeletonContent {...customProps} animationDirection="verticalTop">
+      <Shimmer {...customProps} animationDirection="verticalTop">
         <Text style={{ fontSize: 24 }} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     gradient = component.root.findByType(LinearGradient);
@@ -294,9 +300,9 @@ describe('SkeletonComponent test suite', () => {
     expect(gradient.props.end).toEqual({ x: 0, y: 1 });
 
     component.update(
-      <SkeletonContent {...customProps} animationDirection="verticalDown">
+      <Shimmer {...customProps} animationDirection="verticalDown">
         <Text style={{ fontSize: 24 }} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     gradient = component.root.findByType(LinearGradient);
@@ -305,9 +311,9 @@ describe('SkeletonComponent test suite', () => {
     expect(gradient.props.end).toEqual({ x: 0, y: 1 });
 
     component.update(
-      <SkeletonContent {...customProps} animationDirection="horizontalLeft">
+      <Shimmer {...customProps} animationDirection="horizontalLeft">
         <Text style={{ fontSize: 24 }} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     gradient = component.root.findByType(LinearGradient);
@@ -316,9 +322,9 @@ describe('SkeletonComponent test suite', () => {
     expect(gradient.props.end).toEqual({ x: 1, y: 0 });
 
     component.update(
-      <SkeletonContent {...customProps} animationDirection="horizontalRight">
+      <Shimmer {...customProps} animationDirection="horizontalRight">
         <Text style={{ fontSize: 24 }} />
-      </SkeletonContent>
+      </Shimmer>,
     );
 
     gradient = component.root.findByType(LinearGradient);
@@ -329,7 +335,7 @@ describe('SkeletonComponent test suite', () => {
     expect(gradient.props.colors).toEqual([
       DEFAULT_BONE_COLOR,
       DEFAULT_HIGHLIGHT_COLOR,
-      DEFAULT_BONE_COLOR
+      DEFAULT_BONE_COLOR,
     ]);
   });
 });

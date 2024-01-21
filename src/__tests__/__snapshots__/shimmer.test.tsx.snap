@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SkeletonComponent test suite should have correct props and layout between loading states 1`] = `
+exports[`Shimmer Component test suite should have correct props and layout between loading states 1`] = `
 <View
   onLayout={[Function]}
   style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -13,7 +13,7 @@ exports[`SkeletonComponent test suite should have correct props and layout betwe
 >
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#E1E9EE",
         "borderRadius": 4,
         "height": 100,
@@ -25,46 +25,46 @@ exports[`SkeletonComponent test suite should have correct props and layout betwe
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": "100%",
             "position": "absolute",
             "width": "100%",
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": undefined,
               },
             ],
           },
-          Object {},
+          {},
         ]
       }
     >
       <BVLinearGradient
         colors={
-          Array [
+          [
             4292995566,
             4294113532,
             4292995566,
           ]
         }
         endPoint={
-          Object {
+          {
             "x": 1,
             "y": 0,
           }
         }
         locations={null}
         startPoint={
-          Object {
+          {
             "x": 0,
             "y": 0,
           }
         }
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -73,7 +73,7 @@ exports[`SkeletonComponent test suite should have correct props and layout betwe
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#E1E9EE",
         "borderRadius": 4,
         "height": 40,
@@ -84,46 +84,46 @@ exports[`SkeletonComponent test suite should have correct props and layout betwe
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": "100%",
             "position": "absolute",
             "width": "100%",
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": undefined,
               },
             ],
           },
-          Object {},
+          {},
         ]
       }
     >
       <BVLinearGradient
         colors={
-          Array [
+          [
             4292995566,
             4294113532,
             4292995566,
           ]
         }
         endPoint={
-          Object {
+          {
             "x": 1,
             "y": 0,
           }
         }
         locations={null}
         startPoint={
-          Object {
+          {
             "x": 0,
             "y": 0,
           }
         }
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -133,24 +133,11 @@ exports[`SkeletonComponent test suite should have correct props and layout betwe
 </View>
 `;
 
-exports[`SkeletonComponent test suite should render empty alone 1`] = `
+exports[`Shimmer Component test suite should have the correct layout when loading 1`] = `
 <View
   onLayout={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
-  }
-/>
-`;
-
-exports[`SkeletonComponent test suite should support nested layouts 1`] = `
-<View
-  onLayout={[Function]}
-  style={
-    Object {
+    {
       "alignItems": "center",
       "flex": 1,
       "justifyContent": "center",
@@ -159,7 +146,63 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
 >
   <View
     style={
-      Object {
+      [
+        {},
+        {
+          "backgroundColor": "#E1E9EE",
+          "borderRadius": 4,
+          "height": 100,
+          "marginBottom": 10,
+          "overflow": "hidden",
+          "width": 240,
+        },
+      ]
+    }
+  />
+  <View
+    style={
+      [
+        {},
+        {
+          "backgroundColor": "grey",
+          "borderRadius": 20,
+          "height": 40,
+          "overflow": "hidden",
+          "width": 180,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Shimmer Component test suite should render empty alone 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Shimmer Component test suite should support nested layouts 1`] = `
+<View
+  onLayout={[Function]}
+  style={
+    {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      {
         "flexDirection": "row",
         "height": 300,
         "width": 320,
@@ -168,7 +211,7 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
   >
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#E1E9EE",
           "borderRadius": 4,
           "height": 120,
@@ -179,46 +222,46 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "height": "100%",
               "position": "absolute",
               "width": "100%",
             },
-            Object {
-              "transform": Array [
-                Object {
+            {
+              "transform": [
+                {
                   "translateX": undefined,
                 },
               ],
             },
-            Object {},
+            {},
           ]
         }
       >
         <BVLinearGradient
           colors={
-            Array [
+            [
               4292995566,
               4294113532,
               4292995566,
             ]
           }
           endPoint={
-            Object {
+            {
               "x": 1,
               "y": 0,
             }
           }
           locations={null}
           startPoint={
-            Object {
+            {
               "x": 0,
               "y": 0,
             }
           }
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -227,7 +270,7 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
     </View>
     <View
       style={
-        Object {
+        {
           "backgroundColor": "#E1E9EE",
           "borderRadius": 4,
           "height": 100,
@@ -238,46 +281,46 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
     >
       <View
         style={
-          Array [
-            Object {
+          [
+            {
               "height": "100%",
               "position": "absolute",
               "width": "100%",
             },
-            Object {
-              "transform": Array [
-                Object {
+            {
+              "transform": [
+                {
                   "translateX": undefined,
                 },
               ],
             },
-            Object {},
+            {},
           ]
         }
       >
         <BVLinearGradient
           colors={
-            Array [
+            [
               4292995566,
               4294113532,
               4292995566,
             ]
           }
           endPoint={
-            Object {
+            {
               "x": 1,
               "y": 0,
             }
           }
           locations={null}
           startPoint={
-            Object {
+            {
               "x": 0,
               "y": 0,
             }
           }
           style={
-            Object {
+            {
               "flex": 1,
             }
           }
@@ -287,7 +330,7 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "grey",
         "borderRadius": 20,
         "height": 40,
@@ -298,46 +341,46 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": "100%",
             "position": "absolute",
             "width": "100%",
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": undefined,
               },
             ],
           },
-          Object {},
+          {},
         ]
       }
     >
       <BVLinearGradient
         colors={
-          Array [
+          [
             4292995566,
             4294113532,
             4292995566,
           ]
         }
         endPoint={
-          Object {
+          {
             "x": 1,
             "y": 0,
           }
         }
         locations={null}
         startPoint={
-          Object {
+          {
             "x": 0,
             "y": 0,
           }
         }
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -347,11 +390,11 @@ exports[`SkeletonComponent test suite should support nested layouts 1`] = `
 </View>
 `;
 
-exports[`SkeletonComponent test suite should support percentage for child size 1`] = `
+exports[`Shimmer Component test suite should support percentage for child size 1`] = `
 <View
   onLayout={[Function]}
   style={
-    Object {
+    {
       "height": 300,
       "width": 320,
     }
@@ -359,7 +402,7 @@ exports[`SkeletonComponent test suite should support percentage for child size 1
 >
   <View
     style={
-      Object {
+      {
         "backgroundColor": "grey",
         "borderRadius": 20,
         "height": "50%",
@@ -370,46 +413,46 @@ exports[`SkeletonComponent test suite should support percentage for child size 1
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": "100%",
             "position": "absolute",
             "width": "100%",
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": undefined,
               },
             ],
           },
-          Object {},
+          {},
         ]
       }
     >
       <BVLinearGradient
         colors={
-          Array [
+          [
             4292995566,
             4294113532,
             4292995566,
           ]
         }
         endPoint={
-          Object {
+          {
             "x": 1,
             "y": 0,
           }
         }
         locations={null}
         startPoint={
-          Object {
+          {
             "x": 0,
             "y": 0,
           }
         }
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
@@ -418,7 +461,7 @@ exports[`SkeletonComponent test suite should support percentage for child size 1
   </View>
   <View
     style={
-      Object {
+      {
         "backgroundColor": "#E1E9EE",
         "borderRadius": 10,
         "height": "10%",
@@ -429,46 +472,46 @@ exports[`SkeletonComponent test suite should support percentage for child size 1
   >
     <View
       style={
-        Array [
-          Object {
+        [
+          {
             "height": "100%",
             "position": "absolute",
             "width": "100%",
           },
-          Object {
-            "transform": Array [
-              Object {
+          {
+            "transform": [
+              {
                 "translateX": undefined,
               },
             ],
           },
-          Object {},
+          {},
         ]
       }
     >
       <BVLinearGradient
         colors={
-          Array [
+          [
             4292995566,
             4294113532,
             4292995566,
           ]
         }
         endPoint={
-          Object {
+          {
             "x": 1,
             "y": 0,
           }
         }
         locations={null}
         startPoint={
-          Object {
+          {
             "x": 0,
             "y": 0,
           }
         }
         style={
-          Object {
+          {
             "flex": 1,
           }
         }
