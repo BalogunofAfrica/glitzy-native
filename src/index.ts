@@ -1,1 +1,1 @@
-export * from './skeleton-content';
+export * from './shimmer';
