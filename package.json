@@ -1,7 +1,7 @@
 {
-  "name": "@balogunofafrica/react-native-skeleton-content-nonexpo",
-  "version": "1.0.0",
-  "description": "A simple and fully customizable React Native component that implements a skeleton-like loader",
+  "name": "rn-content-shimmer",
+  "version": "0.0.1",
+  "description": "A simple and fully customizable implementation of a shimmer placeholder for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -42,16 +42,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo.git"
+    "url": "git+https://github.com/BalogunofAfrica/shimmer-react-native.git"
   },
   "keywords": [
     "node",
     "npm"
   ],
   "bugs": {
-    "url": "https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo/issues"
+    "url": "https://github.com/BalogunofAfrica/shimmer-react-native/issues"
   },
-  "homepage": "https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo#readme",
+  "homepage": "https://github.com/BalogunofAfrica/shimmer-react-native#readme",
   "peerDependencies": {
     "react-native-linear-gradient": ">=2.5.1",
     "react-native-reanimated": "^2.1.0"

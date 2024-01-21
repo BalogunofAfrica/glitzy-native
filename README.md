@@ -1,19 +1,16 @@
-## React Native Skeleton Content Nonexpo
+## React Native Content Shimmer [![npm version](https://img.shields.io/npm/v/rn-content-shimmer.svg?style=flat-square)](https://www.npmjs.com/package/rn-content-shimmer)
+
+<p align="center">
+  <a href="/">
+      <img width="400px" height="400px" alt="React Native Content Shimmer" src="./docs/rn-content-shimmer.png" />
+  </a>
+</p>
 
 > This a fork of [this package](https://github.com/alexZajac/react-native-skeleton-content-nonexpo), it resolves the issue with using it with reanimated and removes the hard requirement on redash
 
-<img width="220px" align="right" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/main.gif" />
+A simple and fully customizable implementation of a shimmer placeholder for React Native. Works in both iOS and Android.
 
-React native Skeleton Content, a simple yet fully customizable component made to achieve loading animation in a Skeleton-style. Works in both iOS and Android.
-
-### New Features
-
-- The package has been rewritten to Hooks and is using the declarative [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) package for animations
-- It finally supports percentages dimensions for bones, for any type of animation!
-
-[![Build Status](https://travis-ci.org/alexZajac/react-native-skeleton-content-nonexpo.svg?branch=master)](https://travis-ci.org/alexZajac/react-native-skeleton-content-nonexpo) [![Coverage Status](https://coveralls.io/repos/github/alexZajac/react-native-skeleton-content-nonexpo/badge.svg?branch=master)](https://coveralls.io/github/alexZajac/react-native-skeleton-content-nonexpo?branch=master) [![npm version](https://img.shields.io/npm/v/react-native-skeleton-content-nonexpo.svg?style=flat-square)](https://www.npmjs.com/package/react-native-skeleton-content)
-
-- [React Native Skeleton Content](#react-native-skeleton-content)
+- [React Native Content Shimmer](#rn-content-shimmer)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Props](#props)
@@ -23,19 +20,48 @@ React native Skeleton Content, a simple yet fully customizable component made to
 ### Installation
 
 ```shell script
-npm install @balogunofafrica/react-native-skeleton-content-nonexpo
+bun install rn-content-shimmer
 ```
 
 or
 
 ```shell script
-yarn add @balogunofafrica/react-native-skeleton-content-nonexpo
+npm install rn-content-shimmer
 ```
 
-> This package requires the `react-native-linear-gradient` package, make sure it's installed and working on your project.
+or
 
-Also install the following peer dependencies as the package depends on them. We prefer you install these dependencies
-inorder to prevent double instance errors.
+```shell script
+yarn add rn-content-shimmer
+```
+
+This package requires an external package for linear gradient. By default it uses [`react-native-linear-gradient`](https://www.npmjs.com/package/react-native-linear-gradient 'default gradient package') package. If you want to use it with the default behaviour you have to install the package:
+
+```shell script
+bun install react-native-linear-gradient
+```
+
+or
+
+```shell script
+npm install react-native-linear-gradient
+```
+
+or
+
+```shell script
+yarn add react-native-linear-gradient
+```
+
+But you can always swap it out with your preferred gradient implementation and pass it via the `LinearGradientComponent` prop.
+
+Also install the following peer dependencies as the package depends on them. We prefer you install these dependencies in order to prevent double instance errors.
+
+```shell script
+bun install react-native-reanimated
+```
+
+or
 
 ```shell script
 npm install react-native-reanimated
@@ -49,13 +75,13 @@ yarn add react-native-reanimated
 
 ### Usage
 
-1.  Import react-native-skeleton-content:
+1.  Import rn-content-shimmer:
 
 ```javascript
-import { SkeletonContent } from '@balogunofafrica/react-native-skeleton-content-nonexpo';
+import { Shimmer } from 'rn-content-shimmer';
 ```
 
-2.  Once you create the SkeletonContent, you have two options:
+2.  Once you create the Shimmer, you have two options:
 
 - **Child Layout** : The component will figure out the layout of its bones with the dimensions of its direct children.
 - **Custom Layout** : You provide a prop `layout` to the component specifying the size of the bones (see the [Examples](#examples) section below). Herunder is the example with a custom layout. A key prop is optional but highly recommended.
@@ -63,28 +89,28 @@ import { SkeletonContent } from '@balogunofafrica/react-native-skeleton-content-
 ```javascript
 export default function Placeholder() {
   return (
-    <SkeletonContent
+    <Shimmer
       containerStyle={{ flex: 1, width: 300 }}
       isLoading={false}
       layout={[
         { key: 'someId', width: 220, height: 20, marginBottom: 6 },
-        { key: 'someOtherId', width: 180, height: 20, marginBottom: 6 }
+        { key: 'someOtherId', width: 180, height: 20, marginBottom: 6 },
       ]}
     >
       <Text style={styles.normalText}>Your content</Text>
       <Text style={styles.bigText}>Other content</Text>
-    </SkeletonContent>
+    </Shimmer>
   );
 }
 ```
 
-3.  Then simply sync the prop `isLoading` to your state to show/hide the SkeletonContent when the assets/data are available to the user.
+3.  Then simply sync the prop `isLoading` to your state to show/hide the Shimmer when the assets/data are available to the user.
 
 ```javascript
 export default function Placeholder() {
   const [loading, setLoading] = useState(true);
   return (
-    <SkeletonContent
+    <Shimmer
       containerStyle={{ flex: 1, width: 300 }}
       isLoading={isLoading}
       {...otherProps}
@@ -97,8 +123,8 @@ export default function Placeholder() {
 
 | Name               | Type             | Default                 | Description                                                                                                                       |
 | ------------------ | ---------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| isLoading          | bool             | **required**            | Shows the Skeleton bones when true                                                                                                |
-| layout             | array of objects | []                      | A custom layout for the Skeleton bones                                                                                            |
+| isLoading          | bool             | **required**            | Shows the Shimmer bones when true                                                                                                 |
+| layout             | array of objects | []                      | A custom layout for the Shimmer bones                                                                                             |
 | duration           | number           | 1200 ms                 | Duration of one cycle of animation                                                                                                |
 | containerStyle     | object           | flex: 1                 | The style applied to the View containing the bones                                                                                |
 | easing             | Easing           | bezier(0.5, 0, 0.25, 1) | Easing of the bones animation                                                                                                     |
@@ -121,7 +147,7 @@ See the playground section to experiment :
 ```javascript
 export default function Placeholder() {
   return (
-    <SkeletonContent
+    <Shimmer
       containerStyle={{ flex: 1, width: 300 }}
       animationDirection="horizontalLeft"
       isLoading={true}
@@ -140,7 +166,7 @@ export default function Placeholder() {
 ```javascript
 export default function Placeholder() {
   return (
-    <SkeletonContent
+    <Shimmer
       containerStyle={{ flex: 1, width: 300 }}
       boneColor="#121212"
       highlightColor="#333333"
@@ -161,14 +187,14 @@ export default function Placeholder() {
 ```javascript
 export default function Placeholder() {
   return (
-    <SkeletonContent
+    <Shimmer
       containerStyle={{ flex: 1, width: 300 }}
       animationDirection="horizontalLeft"
       layout={[
         // long line
         { width: 220, height: 20, marginBottom: 6 },
         // short line
-        { width: 180, height: 20, marginBottom: 6 }
+        { width: 180, height: 20, marginBottom: 6 },
         // ...
       ]}
       isLoading={true}
