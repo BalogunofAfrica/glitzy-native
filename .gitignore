@@ -12,3 +12,4 @@ coverage
 lib
 .vscode
 coverage
+.eslintcache
