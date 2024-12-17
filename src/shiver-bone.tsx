@@ -30,7 +30,7 @@ export function ShiverBone({
   LinearGradientComponent,
   positionRange,
 }: ShiverBoneProps) {
-  // biome-ignore lint/suspicious/noExplicitAny: clash in types
+  // biome-ignore lint/suspicious/noExplicitAny:
   const animatedStyle = useAnimatedStyle<any>(() => {
     switch (animationDirection) {
       case "verticalTop":

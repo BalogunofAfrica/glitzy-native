@@ -1,4 +1,9 @@
-import { Easing, type EasingFunctionFactory } from "react-native-reanimated";
+import type {
+  AnimatableValue,
+  WithTimingConfig,
+  EasingFunctionFactory,
+} from "react-native-reanimated";
+import { Easing, withRepeat, withTiming } from "react-native-reanimated";
 import type { AnimationDirection, AnimationType } from "./types";
 
 export const DEFAULT_BORDER_RADIUS = 4;
@@ -14,5 +19,19 @@ export const DEFAULT_EASING: EasingFunctionFactory = Easing.bezier(
   0.25,
   1
 );
-
 export const DEFAULT_LOADING = true;
+export const ANIMATIONS = {
+  none: () => 0,
+  pulse: (config: WithTimingConfig) =>
+    withRepeat(
+      withTiming(1, { ...config, duration: (config.duration ?? 0) / 2 }),
+      -1,
+      true
+    ),
+  shiver: (config: WithTimingConfig) =>
+    withRepeat(withTiming(1, config), -1, false),
+} as const satisfies Record<
+  AnimationType,
+  // biome-ignore lint/suspicious/noExplicitAny:
+  (...props: any[]) => AnimatableValue | number
+>;

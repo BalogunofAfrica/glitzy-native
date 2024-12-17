@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import type { LayoutChangeEvent } from "react-native";
 import { DEFAULT_BORDER_RADIUS } from "./constants";
 import type {
@@ -6,7 +7,6 @@ import type {
   CustomViewStyle,
   Direction,
 } from "./types";
-import { useCallback, useState } from "react";
 
 export const getBoneStyles = (
   boneLayout: CustomViewStyle,

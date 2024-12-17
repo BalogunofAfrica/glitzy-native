@@ -1,9 +1,6 @@
 import type { PropsWithChildren, ReactElement } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
-import type {
-  EasingFunctionFactory,
-  SharedValue,
-} from "react-native-reanimated";
+import type { SharedValue, WithTimingConfig } from "react-native-reanimated";
 
 export type AnimationType = "none" | "shiver" | "pulse";
 export type AnimationDirection =
@@ -35,12 +32,17 @@ export interface GlitzyProps
     animationType?: AnimationType;
     boneColor?: string;
     containerStyle?: StyleProp<ViewStyle>;
-    duration?: number;
-    easing?: EasingFunctionFactory;
+    duration?: WithTimingConfig["duration"];
+    easing?: WithTimingConfig["easing"];
     highlightColor?: string;
     isLoading: boolean;
     layout?: CustomViewStyle[];
   }> {}
+
+export interface GroupProps
+  extends PropsWithChildren<
+    Pick<GlitzyProps, "animationType" | "duration" | "easing">
+  > {}
 
 export interface Direction {
   x: number;
