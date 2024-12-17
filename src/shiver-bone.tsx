@@ -1,20 +1,20 @@
-import React from 'react';
-import { View, ViewStyle } from 'react-native';
+import React from "react";
+import { View, type ViewStyle } from "react-native";
 import Animated, {
   interpolate,
   useAnimatedStyle,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 import {
   getBoneStyles,
   getGradientEndDirection,
   getGradientSize,
-} from './helpers';
-import type { ShiverBoneProps } from './types';
+} from "./helpers";
+import type { ShiverBoneProps } from "./types";
 
 const absoluteGradient$ = {
-  height: '100%',
-  position: 'absolute',
-  width: '100%',
+  height: "100%",
+  position: "absolute",
+  width: "100%",
 } satisfies ViewStyle;
 
 const gradientChild$ = {
@@ -33,21 +33,22 @@ export function ShiverBone({
   LinearGradientComponent,
   positionRange,
 }: ShiverBoneProps) {
+  // biome-ignore lint/suspicious/noExplicitAny: clash in types
   const animatedStyle = useAnimatedStyle<any>(() => {
     if (
-      animationDirection === 'verticalTop' ||
-      animationDirection === 'verticalDown' ||
-      animationDirection === 'horizontalLeft' ||
-      animationDirection === 'horizontalRight'
+      animationDirection === "verticalTop" ||
+      animationDirection === "verticalDown" ||
+      animationDirection === "horizontalLeft" ||
+      animationDirection === "horizontalRight"
     ) {
       const interpolatedPosition = interpolate(
         animationValue.value,
         [0, 1],
-        positionRange,
+        positionRange
       );
       if (
-        animationDirection === 'verticalTop' ||
-        animationDirection === 'verticalDown'
+        animationDirection === "verticalTop" ||
+        animationDirection === "verticalDown"
       ) {
         return {
           transform: [{ translateY: interpolatedPosition }],
@@ -59,26 +60,26 @@ export function ShiverBone({
     }
 
     if (
-      animationDirection === 'diagonalDownRight' ||
-      animationDirection === 'diagonalTopRight' ||
-      animationDirection === 'diagonalDownLeft' ||
-      animationDirection === 'diagonalTopLeft'
+      animationDirection === "diagonalDownRight" ||
+      animationDirection === "diagonalTopRight" ||
+      animationDirection === "diagonalDownLeft" ||
+      animationDirection === "diagonalTopLeft"
     ) {
       const diagonal = Math.sqrt(
-        boneHeight * boneHeight + boneWidth * boneWidth,
+        boneHeight * boneHeight + boneWidth * boneWidth
       );
       const mainDimension = Math.max(boneHeight, boneWidth);
       const oppositeDimension =
         mainDimension === boneWidth ? boneHeight : boneWidth;
       const diagonalAngle = Math.acos(mainDimension / diagonal);
       let rotateAngle =
-        animationDirection === 'diagonalDownRight' ||
-        animationDirection === 'diagonalTopLeft'
+        animationDirection === "diagonalDownRight" ||
+        animationDirection === "diagonalTopLeft"
           ? Math.PI / 2 - diagonalAngle
           : Math.PI / 2 + diagonalAngle;
       const additionalRotate =
-        animationDirection === 'diagonalDownRight' ||
-        animationDirection === 'diagonalTopLeft'
+        animationDirection === "diagonalDownRight" ||
+        animationDirection === "diagonalTopLeft"
           ? 2 * diagonalAngle
           : -2 * diagonalAngle;
       const distanceFactor = (diagonal + oppositeDimension) / 2;
@@ -89,24 +90,24 @@ export function ShiverBone({
       let xOutputRange = [0, 0];
       let yOutputRange = [0, 0];
       if (
-        animationDirection === 'diagonalDownRight' ||
-        animationDirection === 'diagonalTopLeft'
+        animationDirection === "diagonalDownRight" ||
+        animationDirection === "diagonalTopLeft"
       ) {
         xOutputRange =
-          animationDirection === 'diagonalDownRight'
+          animationDirection === "diagonalDownRight"
             ? [-sinComponent, sinComponent]
             : [sinComponent, -sinComponent];
         yOutputRange =
-          animationDirection === 'diagonalDownRight'
+          animationDirection === "diagonalDownRight"
             ? [-cosComponent, cosComponent]
             : [cosComponent, -cosComponent];
       } else {
         xOutputRange =
-          animationDirection === 'diagonalDownLeft'
+          animationDirection === "diagonalDownLeft"
             ? [-sinComponent, sinComponent]
             : [sinComponent, -sinComponent];
         yOutputRange =
-          animationDirection === 'diagonalDownLeft'
+          animationDirection === "diagonalDownLeft"
             ? [cosComponent, -cosComponent]
             : [-cosComponent, cosComponent];
         if (mainDimension === boneHeight && boneWidth !== boneHeight) {
@@ -117,12 +118,12 @@ export function ShiverBone({
       const translateX = interpolate(
         animationValue.value,
         [0, 1],
-        xOutputRange,
+        xOutputRange
       );
       const translateY = interpolate(
         animationValue.value,
         [0, 1],
-        yOutputRange,
+        yOutputRange
       );
       if (mainDimension === boneWidth) {
         return {
@@ -150,7 +151,7 @@ export function ShiverBone({
         animationDirection,
         animationType,
         boneWidth,
-        boneHeight,
+        boneHeight
       )}
     >
       <Animated.View
@@ -167,7 +168,7 @@ export function ShiverBone({
             animationDirection,
             animationType,
             boneWidth,
-            boneHeight,
+            boneHeight
           )}
           style={gradientChild$}
         />

@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 import Animated, {
   interpolateColor,
-  useAnimatedStyle
-} from 'react-native-reanimated';
-import { getBoneStyles } from './helpers';
-import type { StaticBoneProps } from './types';
-
+  useAnimatedStyle,
+} from "react-native-reanimated";
+import { getBoneStyles } from "./helpers";
+import type { StaticBoneProps } from "./types";
 
 export function StaticBone({
   animationValue,
@@ -15,16 +14,16 @@ export function StaticBone({
   boneHeight,
   boneWidth,
   highlightColor,
-  layoutStyle
+  layoutStyle,
 }: StaticBoneProps) {
   const animatedStyle = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
       animationValue.value,
       [0, 1],
-      [boneColor!, highlightColor!]
+      [boneColor, highlightColor]
     );
 
-    if (animationType === 'none') return {};
+    if (animationType === "none") return {};
 
     return { backgroundColor };
   });
@@ -41,7 +40,7 @@ export function StaticBone({
           animationType,
           boneWidth,
           boneHeight
-        )
+        ),
       ]}
     />
   );

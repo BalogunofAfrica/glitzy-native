@@ -1,12 +1,12 @@
-import { LayoutChangeEvent } from 'react-native';
-import { DEFAULT_BORDER_RADIUS } from './constants';
+import type { LayoutChangeEvent } from "react-native";
+import { DEFAULT_BORDER_RADIUS } from "./constants";
 import type {
   AnimationDirection,
   AnimationType,
   CustomViewStyle,
   Direction,
-} from './types';
-import { useCallback, useState } from 'react';
+} from "./types";
+import { useCallback, useState } from "react";
 
 export const getBoneStyles = (
   boneLayout: CustomViewStyle,
@@ -14,7 +14,7 @@ export const getBoneStyles = (
   animationDirection: AnimationDirection,
   animationType: AnimationType,
   boneWidth: number,
-  boneHeight: number,
+  boneHeight: number
 ): CustomViewStyle => {
   const { backgroundColor, borderRadius } = boneLayout;
   const boneStyle: CustomViewStyle = {
@@ -23,18 +23,18 @@ export const getBoneStyles = (
     borderRadius: borderRadius || DEFAULT_BORDER_RADIUS,
     ...boneLayout,
   };
-  if (animationType !== 'pulse') {
-    boneStyle.overflow = 'hidden';
+  if (animationType !== "pulse") {
+    boneStyle.overflow = "hidden";
     boneStyle.backgroundColor = backgroundColor || boneColor;
   }
   if (
-    animationDirection === 'diagonalDownRight' ||
-    animationDirection === 'diagonalDownLeft' ||
-    animationDirection === 'diagonalTopRight' ||
-    animationDirection === 'diagonalTopLeft'
+    animationDirection === "diagonalDownRight" ||
+    animationDirection === "diagonalDownLeft" ||
+    animationDirection === "diagonalTopRight" ||
+    animationDirection === "diagonalTopLeft"
   ) {
-    boneStyle.justifyContent = 'center';
-    boneStyle.alignItems = 'center';
+    boneStyle.justifyContent = "center";
+    boneStyle.alignItems = "center";
   }
   return boneStyle;
 };
@@ -42,14 +42,14 @@ export const getBoneStyles = (
 export const getGradientSize = (
   animationDirection: AnimationDirection,
   boneWidth: number,
-  boneHeight: number,
+  boneHeight: number
 ): CustomViewStyle => {
   const gradientStyle: CustomViewStyle = {};
   if (
-    animationDirection === 'diagonalDownRight' ||
-    animationDirection === 'diagonalDownLeft' ||
-    animationDirection === 'diagonalTopRight' ||
-    animationDirection === 'diagonalTopLeft'
+    animationDirection === "diagonalDownRight" ||
+    animationDirection === "diagonalDownLeft" ||
+    animationDirection === "diagonalTopRight" ||
+    animationDirection === "diagonalTopLeft"
   ) {
     gradientStyle.width = boneWidth;
     gradientStyle.height = boneHeight;
@@ -63,27 +63,27 @@ export const getGradientEndDirection = (
   animationDirection: AnimationDirection,
   animationType: AnimationType,
   boneWidth: number,
-  boneHeight: number,
+  boneHeight: number
 ): Direction => {
   let direction = { x: 0, y: 0 };
-  if (animationType === 'shiver') {
+  if (animationType === "shiver") {
     switch (animationDirection) {
-      case 'horizontalLeft':
-      case 'horizontalRight': {
+      case "horizontalLeft":
+      case "horizontalRight": {
         direction = { x: 1, y: 0 };
 
         break;
       }
-      case 'verticalTop':
-      case 'verticalDown': {
+      case "verticalTop":
+      case "verticalDown": {
         direction = { x: 0, y: 1 };
 
         break;
       }
-      case 'diagonalTopRight':
-      case 'diagonalDownRight':
-      case 'diagonalDownLeft':
-      case 'diagonalTopLeft': {
+      case "diagonalTopRight":
+      case "diagonalDownRight":
+      case "diagonalDownLeft":
+      case "diagonalTopLeft": {
         if (boneWidth && boneHeight && boneWidth > boneHeight)
           return { x: 0, y: 1 };
         return { x: 1, y: 0 };
@@ -95,12 +95,16 @@ export const getGradientEndDirection = (
 };
 
 export const useLayout = () => {
-  const [size, setSize] = useState({ width: 0, height: 0 });
+  const [size] = useState({ width: 0, height: 0 });
 
-  const onLayout = useCallback((event: LayoutChangeEvent) => {
-    const { width, height } = event.nativeEvent.layout;
-    setSize({ width, height });
-  }, []);
+  const onLayout = useCallback(
+    (event: LayoutChangeEvent) => {
+      const { width, height } = event.nativeEvent.layout;
+      size.width = width;
+      size.height = height;
+    },
+    [size]
+  );
 
   return [size, onLayout] as const;
 };

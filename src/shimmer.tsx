@@ -1,10 +1,11 @@
-import React, { Children, memo, useEffect } from 'react';
-import { View, ViewStyle } from 'react-native';
+import type React from "react";
+import { Children, memo, useEffect } from "react";
+import { View, type ViewStyle } from "react-native";
 import {
   useSharedValue,
   withRepeat,
   withTiming,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 import {
   DEFAULT_ANIMATION_DIRECTION,
   DEFAULT_ANIMATION_TYPE,
@@ -13,16 +14,16 @@ import {
   DEFAULT_EASING,
   DEFAULT_HIGHLIGHT_COLOR,
   DEFAULT_LOADING,
-} from './constants';
-import { useLayout } from './helpers';
-import { ShiverBone } from './shiver-bone';
-import { StaticBone } from './static-bone';
-import type { CustomViewStyle, ShimmerProps } from './types';
+} from "./constants";
+import { useLayout } from "./helpers";
+import { ShiverBone } from "./shiver-bone";
+import { StaticBone } from "./static-bone";
+import type { CustomViewStyle, ShimmerProps } from "./types";
 
 const container$ = {
-  alignItems: 'center',
+  alignItems: "center",
   flex: 1,
-  justifyContent: 'center',
+  justifyContent: "center",
 } satisfies ViewStyle;
 
 const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
@@ -41,16 +42,16 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
   const GradientComponent =
     LinearGradientComponent ||
     // eslint-disable-next-line unicorn/prefer-module, @typescript-eslint/no-var-requires
-    require('react-native-linear-gradient').LinearGradient;
+    require("react-native-linear-gradient").LinearGradient;
   if (!GradientComponent) {
     throw new Error(
-      "Error: 'react-native-linear-gradient' is not installed and no 'LinearGradientComponent' was provided.",
+      "Error: 'react-native-linear-gradient' is not installed and no 'LinearGradientComponent' was provided."
     );
   }
 
   const animationValue = useSharedValue(0);
   const loadingValue = useSharedValue(isLoading ? 1 : 0);
-  const shiverValue = useSharedValue(animationType === 'shiver' ? 1 : 0);
+  const shiverValue = useSharedValue(animationType === "shiver" ? 1 : 0);
   const [componentSize, onLayout] = useLayout();
 
   useEffect(() => {
@@ -59,19 +60,19 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
         shiverValue.value === 1
           ? withRepeat(withTiming(1, { duration, easing }), -1, false)
           : withRepeat(
-              withTiming(1, { duration: duration! / 2, easing }),
+              withTiming(1, { duration: duration / 2, easing }),
               -1,
-              true,
+              true
             );
     }
   }, [loadingValue, shiverValue, animationValue, duration, easing]);
 
   const getBoneWidth = (boneLayout: CustomViewStyle) =>
-    (typeof boneLayout.width === 'string'
+    (typeof boneLayout.width === "string"
       ? componentSize.width
       : Number(boneLayout.width)) || 0;
   const getBoneHeight = (boneLayout: CustomViewStyle) =>
-    (typeof boneLayout.height === 'string'
+    (typeof boneLayout.height === "string"
       ? componentSize.height
       : Number(boneLayout.height)) || 0;
 
@@ -82,22 +83,22 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
     const boneHeight = getBoneHeight(boneLayout);
 
     switch (animationDirection) {
-      case 'horizontalRight': {
+      case "horizontalRight": {
         outputRange.push(-boneWidth, +boneWidth);
 
         break;
       }
-      case 'horizontalLeft': {
+      case "horizontalLeft": {
         outputRange.push(+boneWidth, -boneWidth);
 
         break;
       }
-      case 'verticalDown': {
+      case "verticalDown": {
         outputRange.push(-boneHeight, +boneHeight);
 
         break;
       }
-      case 'verticalTop': {
+      case "verticalTop": {
         outputRange.push(+boneHeight, -boneHeight);
 
         break;
@@ -110,7 +111,7 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
   const getBoneContainer = (
     layoutStyle: CustomViewStyle,
     childrenBones: JSX.Element[],
-    key: number | string,
+    key: number | string
   ) => (
     <View key={layoutStyle.key || key} style={layoutStyle}>
       {childrenBones}
@@ -119,8 +120,8 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
 
   const getBones = (
     bonesLayout: CustomViewStyle[] | undefined,
-    childrenItems: any,
-    prefix: string | number = '',
+    childrenItems: React.ReactNode,
+    prefix: string | number = ""
   ): JSX.Element[] => {
     if (bonesLayout && bonesLayout.length > 0) {
       const iterator = Array.from({ length: bonesLayout.length }, () => 0);
@@ -128,7 +129,7 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
         // has a nested layout
         if (
           bonesLayout[index].children &&
-          bonesLayout[index].children!.length > 0
+          bonesLayout[index].children.length > 0
         ) {
           const containerPrefix =
             bonesLayout[index].key || `bone_container_${index}`;
@@ -136,10 +137,10 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
           return getBoneContainer(
             layoutStyle,
             getBones(childBones, [], containerPrefix),
-            containerPrefix,
+            containerPrefix
           );
         }
-        if (animationType === 'pulse' || animationType === 'none') {
+        if (animationType === "pulse" || animationType === "none") {
           return (
             <StaticBone
               key={prefix ? `${prefix}_${index}` : index}
@@ -175,9 +176,9 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
         );
       });
     }
-    return Children.map(childrenItems, (child, index) => {
+    return Children.map(childrenItems as React.ReactElement, (child, index) => {
       const styling = child.props.style || {};
-      if (animationType === 'pulse' || animationType === 'none') {
+      if (animationType === "pulse" || animationType === "none") {
         return (
           <StaticBone
             key={prefix ? `${prefix}_${index}` : index}

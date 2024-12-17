@@ -1,19 +1,20 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { PropsWithChildren } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import type {
   EasingFunctionFactory,
   SharedValue,
-} from 'react-native-reanimated';
+} from "react-native-reanimated";
 
-export type AnimationType = 'none' | 'shiver' | 'pulse';
+export type AnimationType = "none" | "shiver" | "pulse";
 export type AnimationDirection =
-  | 'horizontalLeft'
-  | 'horizontalRight'
-  | 'verticalTop'
-  | 'verticalDown'
-  | 'diagonalDownLeft'
-  | 'diagonalDownRight'
-  | 'diagonalTopLeft'
-  | 'diagonalTopRight';
+  | "horizontalLeft"
+  | "horizontalRight"
+  | "verticalTop"
+  | "verticalDown"
+  | "diagonalDownLeft"
+  | "diagonalDownRight"
+  | "diagonalTopLeft"
+  | "diagonalTopRight";
 
 export interface CustomViewStyle extends ViewStyle {
   children?: CustomViewStyle[];
@@ -27,19 +28,19 @@ export interface GradientProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export interface ShimmerProps {
-  LinearGradientComponent?: React.ComponentClass<GradientProps>;
-  animationDirection?: AnimationDirection;
-  animationType?: AnimationType;
-  boneColor?: string;
-  children?: any;
-  containerStyle?: StyleProp<ViewStyle>;
-  duration?: number;
-  easing?: EasingFunctionFactory;
-  highlightColor?: string;
-  isLoading: boolean;
-  layout?: CustomViewStyle[];
-}
+export interface ShimmerProps
+  extends PropsWithChildren<{
+    LinearGradientComponent?: React.ComponentClass<GradientProps>;
+    animationDirection?: AnimationDirection;
+    animationType?: AnimationType;
+    boneColor?: string;
+    containerStyle?: StyleProp<ViewStyle>;
+    duration?: number;
+    easing?: EasingFunctionFactory;
+    highlightColor?: string;
+    isLoading: boolean;
+    layout?: CustomViewStyle[];
+  }> {}
 
 export interface Direction {
   x: number;
@@ -50,11 +51,11 @@ export interface ShiverBoneProps
   extends Required<
     Pick<
       ShimmerProps,
-      | 'animationDirection'
-      | 'animationType'
-      | 'boneColor'
-      | 'highlightColor'
-      | 'LinearGradientComponent'
+      | "animationDirection"
+      | "animationType"
+      | "boneColor"
+      | "highlightColor"
+      | "LinearGradientComponent"
     >
   > {
   animationValue: SharedValue<number>;
@@ -68,7 +69,7 @@ export interface StaticBoneProps
   extends Required<
     Pick<
       ShimmerProps,
-      'animationDirection' | 'animationType' | 'boneColor' | 'highlightColor'
+      "animationDirection" | "animationType" | "boneColor" | "highlightColor"
     >
   > {
   animationValue: SharedValue<number>;
