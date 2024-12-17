@@ -1,6 +1,7 @@
 import { Glitzy as NGlitzy } from "./glitzy";
 import { Canvas, LinearGradient, vec } from "@shopify/react-native-skia";
 import type { GlitzyProps, GradientProps } from "./types";
+import { GlitzyGroup } from "./group";
 
 const Gradient = (props: GradientProps) => (
   <Canvas style={props.style}>
@@ -15,3 +16,5 @@ const Gradient = (props: GradientProps) => (
 export function Glitzy(props: Omit<GlitzyProps, "LinearGradientComponent">) {
   return <NGlitzy LinearGradientComponent={Gradient} {...props} />;
 }
+
+Glitzy.Group = GlitzyGroup;

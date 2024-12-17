@@ -25,7 +25,7 @@ const container$ = {
   justifyContent: "center",
 } satisfies ViewStyle;
 
-function GlitzyComponent({
+export function Glitzy({
   LinearGradientComponent,
   containerStyle = container$,
   easing = DEFAULT_EASING,
@@ -247,6 +247,4 @@ function GlitzyComponent({
   );
 }
 
-export const Glitzy = Object.assign(GlitzyComponent, {
-  Group: GlitzyGroup,
-});
+Glitzy.Group = GlitzyGroup;
