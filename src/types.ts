@@ -27,7 +27,7 @@ export interface GradientProps {
 
 export interface GlitzyProps
   extends PropsWithChildren<{
-    LinearGradientComponent?: (props: GradientProps) => ReactElement;
+    LinearGradientComponent: (props: GradientProps) => ReactElement;
     animationDirection?: AnimationDirection;
     animationType?: AnimationType;
     boneColor?: string;
@@ -43,6 +43,9 @@ export interface GlitzyGroupProps
   extends PropsWithChildren<
     Pick<GlitzyProps, "animationType" | "duration" | "easing">
   > {}
+
+export interface GlitzyImplProps
+  extends Omit<GlitzyProps, "LinearGradientComponent"> {}
 
 export interface Direction {
   x: number;
