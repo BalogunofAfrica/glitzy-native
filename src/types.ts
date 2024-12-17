@@ -39,7 +39,7 @@ export interface GlitzyProps
     layout?: CustomViewStyle[];
   }> {}
 
-export interface GroupProps
+export interface GlitzyGroupProps
   extends PropsWithChildren<
     Pick<GlitzyProps, "animationType" | "duration" | "easing">
   > {}

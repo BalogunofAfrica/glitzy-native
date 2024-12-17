@@ -12,7 +12,7 @@ import {
   DEFAULT_HIGHLIGHT_COLOR,
   DEFAULT_LOADING,
 } from "./constants";
-import { useGroup } from "./group";
+import { GlitzyGroup, useGroup } from "./group";
 import { useLayout } from "./helpers";
 import { LeanView } from "./lean-view";
 import { ShiverBone } from "./shiver-bone";
@@ -25,7 +25,7 @@ const container$ = {
   justifyContent: "center",
 } satisfies ViewStyle;
 
-const GlitzyComponent: React.FunctionComponent<GlitzyProps> = ({
+function GlitzyComponent({
   LinearGradientComponent,
   containerStyle = container$,
   easing = DEFAULT_EASING,
@@ -37,7 +37,7 @@ const GlitzyComponent: React.FunctionComponent<GlitzyProps> = ({
   boneColor = DEFAULT_BONE_COLOR,
   highlightColor = DEFAULT_HIGHLIGHT_COLOR,
   children,
-}) => {
+}: GlitzyProps) {
   if (!LinearGradientComponent) {
     throw new Error("Error: No 'LinearGradientComponent' was provided.");
   }
@@ -245,6 +245,8 @@ const GlitzyComponent: React.FunctionComponent<GlitzyProps> = ({
       {isLoading ? getBones(layout, children) : children}
     </LeanView>
   );
-};
+}
 
-export const Glitzy = memo(GlitzyComponent);
+export const Glitzy = Object.assign(GlitzyComponent, {
+  Group: GlitzyGroup,
+});

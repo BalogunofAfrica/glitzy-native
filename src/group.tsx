@@ -6,7 +6,7 @@ import {
   DEFAULT_DURATION,
   DEFAULT_EASING,
 } from "./constants";
-import type { GlitzyProps, GroupProps } from "./types";
+import type { GlitzyProps, GlitzyGroupProps } from "./types";
 
 type GroupContext = {
   animationType: NonNullable<GlitzyProps["animationType"]>;
@@ -24,7 +24,7 @@ export function GlitzyGroup({
   children,
   duration = DEFAULT_DURATION,
   easing = DEFAULT_EASING,
-}: GroupProps) {
+}: GlitzyGroupProps) {
   const animationValue = useSharedValue(0);
 
   useEffect(() => {
