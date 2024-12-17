@@ -18,68 +18,31 @@
     "test": "jest --no-watchman",
     "test:snapshot": "yarn test -u"
   },
-  "jest": {
-    "preset": "jest-expo",
-    "setupFiles": [
-      "./setup-test.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    },
-    "testMatch": [
-      "**/*.test.ts?(x)"
-    ],
-    "coveragePathIgnorePatterns": [
-      "./src/__tests__/"
-    ]
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BalogunofAfrica/shimmer-react-native.git"
+    "url": "git+https://github.com/BalogunofAfrica/glitzy-native.git"
   },
   "keywords": [
     "node",
     "npm"
   ],
   "bugs": {
-    "url": "https://github.com/BalogunofAfrica/shimmer-react-native/issues"
+    "url": "https://github.com/BalogunofAfrica/glitzy-native/issues"
   },
-  "homepage": "https://github.com/BalogunofAfrica/shimmer-react-native#readme",
+  "homepage": "https://github.com/BalogunofAfrica/glitzy-native#readme",
   "peerDependencies": {
-    "react-native-linear-gradient": ">=2.5.1",
-    "react-native-reanimated": "^2.1.0"
+    "react": "*",
+    "react-native": "*",
+    "react-native-reanimated": ">=2.1.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.23.3",
-    "@types/jest": "^29.5.11",
     "@types/react": "^18.2.48",
-    "@types/react-test-renderer": "^18.0.7",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "babel-jest": "^29.7.0",
-    "babel-preset-expo": "^10.0.1",
-    "claudia": "^5.14.1",
-    "eslint": "^8.44.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-unicorn": "^47.0.0",
-    "expo": "^50.0.2",
-    "jest": "^29.7.0",
-    "jest-expo": "^50.0.1",
-    "prettier": "^3.2.4",
+    "@biomejs/biome": "1.9.4",
+    "@types/bun": "latest",
     "react": "^18.2.0",
-    "react-native": "^0.73.2",
-    "react-native-gesture-handler": "^1.7.0",
+    "react-native": "^0.76.5",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "^2.1.0",
-    "react-test-renderer": "^18.2.0",
     "typescript": "~5.0.0"
   },
   "author": "Abdulmumin Usman",
