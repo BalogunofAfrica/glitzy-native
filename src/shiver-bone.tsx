@@ -30,6 +30,10 @@ export function ShiverBone({
   LinearGradientComponent,
   positionRange,
 }: ShiverBoneProps) {
+  if (!LinearGradientComponent) {
+    throw new Error("Error: No 'LinearGradientComponent' was provided.");
+  }
+
   // biome-ignore lint/suspicious/noExplicitAny:
   const animatedStyle = useAnimatedStyle<any>(() => {
     switch (animationDirection) {

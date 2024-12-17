@@ -27,7 +27,7 @@ export interface GradientProps {
 
 export interface GlitzyProps
   extends PropsWithChildren<{
-    LinearGradientComponent: (props: GradientProps) => ReactElement;
+    LinearGradientComponent?: (props: GradientProps) => ReactElement;
     animationDirection?: AnimationDirection;
     animationType?: AnimationType;
     boneColor?: string;
@@ -53,15 +53,13 @@ export interface Direction {
 }
 
 export interface ShiverBoneProps
-  extends Required<
-    Pick<
-      GlitzyProps,
-      | "animationDirection"
-      | "animationType"
-      | "boneColor"
-      | "highlightColor"
-      | "LinearGradientComponent"
-    >
+  extends Pick<
+    GlitzyProps,
+    | "animationDirection"
+    | "animationType"
+    | "boneColor"
+    | "highlightColor"
+    | "LinearGradientComponent"
   > {
   animationValue: SharedValue<number>;
   boneHeight: number;

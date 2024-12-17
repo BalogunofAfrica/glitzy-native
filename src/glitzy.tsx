@@ -38,10 +38,6 @@ export function Glitzy({
   highlightColor = DEFAULT_HIGHLIGHT_COLOR,
   children,
 }: GlitzyProps) {
-  if (!LinearGradientComponent) {
-    throw new Error("Error: No 'LinearGradientComponent' was provided.");
-  }
-
   const group = useGroup();
   const singleAnimation = useSharedValue(0);
   const animationValue = useMemo(() => {
