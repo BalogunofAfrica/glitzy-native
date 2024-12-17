@@ -36,9 +36,11 @@
     "react-native-reanimated": ">=2.1.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.48",
     "@biomejs/biome": "1.9.4",
+    "@shopify/react-native-skia": "^1.7.5",
     "@types/bun": "latest",
+    "@types/react": "^18.2.48",
+    "expo-linear-gradient": "^14.0.1",
     "react": "^18.2.0",
     "react-native": "^0.76.5",
     "react-native-linear-gradient": "^2.5.6",

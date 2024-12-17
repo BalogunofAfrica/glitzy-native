@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
 import type { StyleProp, ViewStyle } from "react-native";
 import type {
   EasingFunctionFactory,
@@ -22,7 +22,7 @@ export interface CustomViewStyle extends ViewStyle {
 }
 
 export interface GradientProps {
-  colors: (string | number)[];
+  colors: [string, string, ...string[]];
   end?: { x: number; y: number };
   start?: { x: number; y: number };
   style?: StyleProp<ViewStyle>;
@@ -30,7 +30,7 @@ export interface GradientProps {
 
 export interface GlitzyProps
   extends PropsWithChildren<{
-    LinearGradientComponent?: React.ComponentClass<GradientProps>;
+    LinearGradientComponent?: (props: GradientProps) => ReactElement;
     animationDirection?: AnimationDirection;
     animationType?: AnimationType;
     boneColor?: string;
