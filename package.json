@@ -1,6 +1,6 @@
 {
-  "name": "rn-content-shimmer",
-  "version": "0.0.2",
+  "name": "glitzy-native",
+  "version": "0.0.1",
   "description": "A simple and fully customizable implementation of a shimmer placeholder for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
