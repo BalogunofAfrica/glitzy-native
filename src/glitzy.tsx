@@ -18,7 +18,7 @@ import {
 import { useLayout } from "./helpers";
 import { ShiverBone } from "./shiver-bone";
 import { StaticBone } from "./static-bone";
-import type { CustomViewStyle, ShimmerProps } from "./types";
+import type { CustomViewStyle, GlitzyProps } from "./types";
 
 const container$ = {
   alignItems: "center",
@@ -26,7 +26,7 @@ const container$ = {
   justifyContent: "center",
 } satisfies ViewStyle;
 
-const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
+const GlitzyComponent: React.FunctionComponent<GlitzyProps> = ({
   LinearGradientComponent,
   containerStyle = container$,
   easing = DEFAULT_EASING,
@@ -127,10 +127,7 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
       const iterator = Array.from({ length: bonesLayout.length }, () => 0);
       return iterator.map((_, index) => {
         // has a nested layout
-        if (
-          bonesLayout[index].children &&
-          bonesLayout[index].children.length > 0
-        ) {
+        if ((bonesLayout[index]?.children?.length ?? 0) > 0) {
           const containerPrefix =
             bonesLayout[index].key || `bone_container_${index}`;
           const { children: childBones, ...layoutStyle } = bonesLayout[index];
@@ -223,4 +220,4 @@ const ShimmerComponent: React.FunctionComponent<ShimmerProps> = ({
   );
 };
 
-export const Shimmer = memo(ShimmerComponent);
+export const Glitzy = memo(GlitzyComponent);

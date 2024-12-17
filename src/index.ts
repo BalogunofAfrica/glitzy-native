@@ -1,1 +1,1 @@
-export * from './shimmer';
+export * from "./glitzy";

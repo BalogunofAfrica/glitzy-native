@@ -28,7 +28,7 @@ export interface GradientProps {
   style?: StyleProp<ViewStyle>;
 }
 
-export interface ShimmerProps
+export interface GlitzyProps
   extends PropsWithChildren<{
     LinearGradientComponent?: React.ComponentClass<GradientProps>;
     animationDirection?: AnimationDirection;
@@ -50,7 +50,7 @@ export interface Direction {
 export interface ShiverBoneProps
   extends Required<
     Pick<
-      ShimmerProps,
+      GlitzyProps,
       | "animationDirection"
       | "animationType"
       | "boneColor"
@@ -68,7 +68,7 @@ export interface ShiverBoneProps
 export interface StaticBoneProps
   extends Required<
     Pick<
-      ShimmerProps,
+      GlitzyProps,
       "animationDirection" | "animationType" | "boneColor" | "highlightColor"
     >
   > {

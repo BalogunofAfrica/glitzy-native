@@ -12,4 +12,4 @@ coverage
 lib
 .vscode
 coverage
-.eslintcache
+.DS_Store
