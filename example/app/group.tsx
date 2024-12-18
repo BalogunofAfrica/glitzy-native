@@ -12,7 +12,7 @@ export default function Group() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const setIndex = Math.floor(Math.random() * 5);
+      const setIndex = Math.floor(Math.random() * skeletons.length);
       setVisibility((item) => {
         const newItem = [...item];
         newItem[setIndex] = !newItem[setIndex];
