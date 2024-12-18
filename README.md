@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="/">
-      <img width="400px" height="400px" alt="Glitzy Native ✨" src="./docs/glitzy.png" />
+      <img width="400px" height="400px" alt="Glitzy Native ✨" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/refactor-package/docs/glitzy.png" />
   </a>
 </p>
 
@@ -191,10 +191,6 @@ Say we have a group of Glitzy Skeletons that we want to visually keep their anim
 
 Before:
 
-<p align="center">
-<img  width="300px" src="./docs/single.gif" />
-</p>
-
 ```tsx
 export default function Placeholder() {
   return (
@@ -232,10 +228,6 @@ export default function Placeholder() {
 
 After:
 
-<p align="center">
-<img width="300px" src="./docs/sync-group.gif" />
-</p>
-
 ```tsx
 export default function Placeholder() {
   return (
@@ -271,4 +263,8 @@ export default function Placeholder() {
 }
 ```
 
-In the before case, the animation of each skeleton in the group is independent and kicks off when the skeleton mounts. In the after case, the animation is controlled in a group so no matter when any skeleton is mounted within that group, its animation is kept in sync with the rest of the group.
+<p align="center">
+<img  width="300px" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/refactor-package/docs/comparison-group.gif" />
+</p>
+
+In the before case (without group), the animation of each skeleton in the group is independent and kicks off when the skeleton mounts. In the after case (with group), the animation is controlled in a group so no matter when any skeleton is mounted within that group, its animation is kept in sync with the rest of the group.
