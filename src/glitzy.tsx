@@ -1,7 +1,7 @@
 import type React from "react";
-import { Children, memo, useCallback, useEffect, useMemo } from "react";
+import { Children, useCallback, useMemo } from "react";
 import type { ViewStyle } from "react-native";
-import { useSharedValue } from "react-native-reanimated";
+import { cancelAnimation, useSharedValue } from "react-native-reanimated";
 import {
   ANIMATIONS,
   DEFAULT_ANIMATION_DIRECTION,
@@ -13,7 +13,7 @@ import {
   DEFAULT_LOADING,
 } from "./constants";
 import { GlitzyGroup, useGroup } from "./group";
-import { useLayout } from "./helpers";
+import { useEffectOnce, useLayout } from "./helpers";
 import { LeanView } from "./lean-view";
 import { ShiverBone } from "./shiver-bone";
 import { StaticBone } from "./static-bone";
@@ -51,13 +51,22 @@ export function Glitzy({
     return singleAnimationType;
   }, [group, singleAnimationType]);
 
-  useEffect(() => {
-    if (group !== null || !isLoading) return;
+  useEffectOnce(() => {
+    if (group !== null) return;
 
-    singleAnimation.value = ANIMATIONS[singleAnimationType]({
-      duration,
-      easing,
-    });
+    const startAnimation = () => {
+      singleAnimation.value = 0;
+      singleAnimation.value = ANIMATIONS[singleAnimationType]({
+        duration,
+        easing,
+      });
+    };
+
+    if (isLoading) {
+      startAnimation();
+    } else {
+      cancelAnimation(singleAnimation);
+    }
   }, [
     duration,
     easing,
