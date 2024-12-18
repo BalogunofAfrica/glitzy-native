@@ -1,7 +1,7 @@
 {
-  "name": "@balogunofafrica/react-native-skeleton-content-nonexpo",
-  "version": "1.0.0",
-  "description": "A simple and fully customizable React Native component that implements a skeleton-like loader",
+  "name": "glitzy-native",
+  "version": "0.0.1",
+  "description": "A simple and fully customizable implementation of a skeleton placeholder for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -11,71 +11,41 @@
     "build": "tsc -p tsconfig.json",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lint": "eslint --fix src/**/*.{ts,tsx}",
-    "prepare": "npm run build",
-    "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
+    "prepare": "yarn build",
+    "preversion": "yarn lint",
+    "version": "yarn format && git add -A src",
     "postversion": "git push && git push --tags",
     "test": "jest --no-watchman",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFiles": [
-      "./setup-test.js"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "ts",
-      "tsx"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-    },
-    "testMatch": [
-      "**/*.test.ts?(x)"
-    ],
-    "coveragePathIgnorePatterns": [
-      "./src/__tests__/"
-    ]
+    "test:snapshot": "yarn test -u"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo.git"
+    "url": "git+https://github.com/BalogunofAfrica/glitzy-native.git"
   },
   "keywords": [
     "node",
     "npm"
   ],
   "bugs": {
-    "url": "https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo/issues"
+    "url": "https://github.com/BalogunofAfrica/glitzy-native/issues"
   },
-  "homepage": "https://github.com/BalogunofAfrica/react-native-skeleton-content-nonexpo#readme",
+  "homepage": "https://github.com/BalogunofAfrica/glitzy-native#readme",
   "peerDependencies": {
-    "react-native-linear-gradient": ">=2.5.1",
-    "react-native-reanimated": "^2.1.0"
+    "react": "*",
+    "react-native": "*",
+    "react-native-reanimated": ">=2.1.0"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.22.15",
-    "@types/jest": "^24.0.18",
-    "@types/react": "^18.2.21",
-    "@types/react-native": "^0.72.2",
-    "@types/react-test-renderer": "^16.9.2",
-    "babel-jest": "^29.7.0",
-    "babel-preset-expo": "^9.5.2",
-    "coveralls": "^3.1.0",
-    "eslint": "^7.2.0",
-    "eslint-config-airbnb-typescript-prettier": "^2.1.1",
-    "jest": "^24.9.0",
-    "prettier": "^1.18.2",
-    "react": "^16.10.2",
-    "react-native": "^0.62.3",
-    "react-native-gesture-handler": "^1.7.0",
+    "@biomejs/biome": "1.9.4",
+    "@shopify/react-native-skia": "^1.7.5",
+    "@types/bun": "latest",
+    "@types/react": "^18.2.48",
+    "expo-linear-gradient": "^14.0.1",
+    "react": "^18.2.0",
+    "react-native": "^0.76.5",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-reanimated": "^2.1.0",
-    "react-test-renderer": "^16.13.1",
-    "typescript": "^5.2.2"
+    "typescript": "~5.0.0"
   },
   "author": "Abdulmumin Usman",
   "license": "MIT"
