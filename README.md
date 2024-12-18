@@ -1,61 +1,41 @@
-## React Native Content Shimmer [![npm version](https://img.shields.io/npm/v/rn-content-shimmer.svg?style=flat-square)](https://www.npmjs.com/package/rn-content-shimmer)
+## Glitzy Native ✨ [![npm version](https://img.shields.io/npm/v/glitzy-native.svg?style=flat-square)](https://www.npmjs.com/package/glitzy-native)
 
 <p align="center">
   <a href="/">
-      <img width="400px" height="400px" alt="React Native Content Shimmer" src="./docs/rn-content-shimmer.png" />
+      <img width="400px" height="400px" alt="Glitzy Native ✨" src="./docs/glitzy.png" />
   </a>
 </p>
 
-> This a fork of [this package](https://github.com/alexZajac/react-native-skeleton-content-nonexpo), it resolves the issue with using it with reanimated and removes the hard requirement on redash
+> ℹ️ **Note**  
+> This was originally a fork of [react-native-skeleton-content-nonexpo](https://github.com/alexZajac/react-native-skeleton-content-nonexpo), which depends on the gradient implementation in [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "default gradient package"). It also resolves the issue with using Reanimated 2.0 and removes the hard requirement on Redash.
 
-A simple and fully customizable implementation of a shimmer placeholder for React Native. Works in both iOS and Android.
+A simple and fully customizable implementation of a skeleton placeholder for React Native. Works on both iOS and Android.
 
-- [React Native Content Shimmer](#rn-content-shimmer)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Props](#props)
-  - [Examples](#examples)
-  - [Playground](#playground)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Props](#props)
+- [Examples](#examples)
+- [Playground](#playground)
 
 ### Installation
 
 ```shell script
-bun install rn-content-shimmer
+bun add glitzy-native
 ```
 
 or
 
 ```shell script
-npm install rn-content-shimmer
+yarn add glitzy-native
 ```
 
 or
 
 ```shell script
-yarn add rn-content-shimmer
+npm install glitzy-native
 ```
 
-This package requires an external package for linear gradient. By default it uses [`react-native-linear-gradient`](https://www.npmjs.com/package/react-native-linear-gradient 'default gradient package') package. If you want to use it with the default behaviour you have to install the package:
-
-```shell script
-bun install react-native-linear-gradient
-```
-
-or
-
-```shell script
-npm install react-native-linear-gradient
-```
-
-or
-
-```shell script
-yarn add react-native-linear-gradient
-```
-
-But you can always swap it out with your preferred gradient implementation and pass it via the `LinearGradientComponent` prop.
-
-Also install the following peer dependencies as the package depends on them. We prefer you install these dependencies in order to prevent double instance errors.
+Also install reanimated which is used as the animation driver:
 
 ```shell script
 bun install react-native-reanimated
@@ -75,42 +55,44 @@ yarn add react-native-reanimated
 
 ### Usage
 
-1.  Import rn-content-shimmer:
+This package gives you the flexibility of providing your own linear gradient implementation based on your project, all you need to do is to pass the implementation via the `LinearGradientComponent` prop. There are implementation files for common gradient packages like [expo](https://docs.expo.dev/versions/latest/sdk/linear-gradient/ "expo linear gradient"), [skia](https://shopify.github.io/react-native-skia/docs/shaders/gradients/#linear-gradient "skia linear gradient component") and [react-native-linear-gradient ](https://www.npmjs.com/package/react-native-linear-gradient "react native linear gradient").
 
-```javascript
-import { Shimmer } from 'rn-content-shimmer';
+1.  Import glitzy-native:
+
+```ts
+import { Glitzy } from "glitzy-native/lib/default";
 ```
 
-2.  Once you create the Shimmer, you have two options:
+2.  Once you create the Skeleton, you have two options:
 
 - **Child Layout** : The component will figure out the layout of its bones with the dimensions of its direct children.
 - **Custom Layout** : You provide a prop `layout` to the component specifying the size of the bones (see the [Examples](#examples) section below). Herunder is the example with a custom layout. A key prop is optional but highly recommended.
 
-```javascript
+```tsx
 export default function Placeholder() {
   return (
-    <Shimmer
+    <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       isLoading={false}
       layout={[
-        { key: 'someId', width: 220, height: 20, marginBottom: 6 },
-        { key: 'someOtherId', width: 180, height: 20, marginBottom: 6 },
+        { key: "someId", width: 220, height: 20, marginBottom: 6 },
+        { key: "someOtherId", width: 180, height: 20, marginBottom: 6 },
       ]}
     >
       <Text style={styles.normalText}>Your content</Text>
       <Text style={styles.bigText}>Other content</Text>
-    </Shimmer>
+    </Glitzy>
   );
 }
 ```
 
-3.  Then simply sync the prop `isLoading` to your state to show/hide the Shimmer when the assets/data are available to the user.
+3.  Then simply sync the prop `isLoading` to your state to show/hide the Skeleton when the assets/data are available to the user.
 
-```javascript
+```tsx
 export default function Placeholder() {
   const [loading, setLoading] = useState(true);
   return (
-    <Shimmer
+    <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       isLoading={isLoading}
       {...otherProps}
@@ -121,19 +103,18 @@ export default function Placeholder() {
 
 ### Props
 
-| Name               | Type             | Default                 | Description                                                                                                                       |
-| ------------------ | ---------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| isLoading          | bool             | **required**            | Shows the Shimmer bones when true                                                                                                 |
-| layout             | array of objects | []                      | A custom layout for the Shimmer bones                                                                                             |
-| duration           | number           | 1200 ms                 | Duration of one cycle of animation                                                                                                |
-| containerStyle     | object           | flex: 1                 | The style applied to the View containing the bones                                                                                |
-| easing             | Easing           | bezier(0.5, 0, 0.25, 1) | Easing of the bones animation                                                                                                     |
-| animationType      | string           | "shiver"                | The animation to be used for animating the bones (see demos below)                                                                |
-| animationDirection | string           | "horizontalRight"       | Used only for shiver animation, describes the direction and end-point (ex: horizontalRight goes on the x-axis from left to right) |
-| boneColor          | string           | "#E1E9EE"               | Color of the bones                                                                                                                |
-| highlightColor     | string           | "#F2F8FC"               | Color of the highlight of the bones                                                                                               |
-
-**Note**: The Easing type function is the one provided by [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated), so if you want to change the default you will have to install it as a dependency.
+| Name                    | Type             | Default                           | Description                                                                                                                       |
+| ----------------------- | ---------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| isLoading               | bool             | **required**                      | Shows the skeleton bones when true                                                                                                |
+| LinearGradientComponent | ReactComponent   | **required** for shiver animation | The gradient implementation to use for the "shiver" animation                                                                     |
+| layout                  | array of objects | []                                | A custom layout for the skeleton bones                                                                                            |
+| duration                | number           | 1200 ms                           | Duration of one cycle of animation                                                                                                |
+| containerStyle          | object           | flex: 1                           | The style applied to the View containing the bones                                                                                |
+| easing                  | Easing           | bezier(0.5, 0, 0.25, 1)           | Easing of the bones animation                                                                                                     |
+| animationType           | string           | "shiver"                          | The animation to be used for animating the bones (see demos below)                                                                |
+| animationDirection      | string           | "horizontalRight"                 | Used only for shiver animation, describes the direction and end-point (ex: horizontalRight goes on the x-axis from left to right) |
+| boneColor               | string           | "#E1E9EE"                         | Color of the bones                                                                                                                |
+| highlightColor          | string           | "#F2F8FC"                         | Color of the highlight of the bones                                                                                               |
 
 ### Examples
 
@@ -144,10 +125,10 @@ See the playground section to experiment :
 <img width="300px" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/direction_change.gif" />
 </p>
 
-```javascript
+```tsx
 export default function Placeholder() {
   return (
-    <Shimmer
+    <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       animationDirection="horizontalLeft"
       isLoading={true}
@@ -163,10 +144,10 @@ export default function Placeholder() {
 <img width="300px" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/color_change.gif" />
 </p>
 
-```javascript
+```tsx
 export default function Placeholder() {
   return (
-    <Shimmer
+    <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       boneColor="#121212"
       highlightColor="#333333"
@@ -184,10 +165,10 @@ export default function Placeholder() {
 <img width="300px" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/layout_change.gif" />
 </p>
 
-```javascript
+```tsx
 export default function Placeholder() {
   return (
-    <Shimmer
+    <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       animationDirection="horizontalLeft"
       layout={[
@@ -203,3 +184,91 @@ export default function Placeholder() {
   );
 }
 ```
+
+**4** - Syncing skeleton animations in groups
+
+Say we have a group of Glitzy Skeletons that we want to visually keep their animation in sync, no matter when any of them mounts, we can wrap these skeletons as children of `Glitzy.Group`
+
+Before:
+
+<p align="center">
+<img  width="300px" src="./docs/single.gif" />
+</p>
+
+```tsx
+export default function Placeholder() {
+  return (
+    <>
+      <Glitzy
+        layout={[
+          {
+            children: [
+              //  ...
+            ],
+            width: 248,
+          },
+          // ...
+        ]}
+        isLoading={true}
+        // ...
+      />
+      <Glitzy
+        layout={[
+          {
+            children: [
+              //  ...
+            ],
+            width: 248,
+          },
+          // ...
+        ]}
+        isLoading={true}
+        // ...
+      />
+    </>
+  );
+}
+```
+
+After:
+
+<p align="center">
+<img width="300px" src="./docs/sync-group.gif" />
+</p>
+
+```tsx
+export default function Placeholder() {
+  return (
+    <Glitzy.Group>
+      <Glitzy
+        layout={[
+          {
+            children: [
+              //  ...
+            ],
+            width: 248,
+          },
+          // ...
+        ]}
+        isLoading={true}
+        // ...
+      />
+      <Glitzy
+        layout={[
+          {
+            children: [
+              //  ...
+            ],
+            width: 248,
+          },
+          // ...
+        ]}
+        isLoading={true}
+        // ...
+      />
+    </Glitzy.Group>
+  );
+}
+```
+
+In the before case, the animation of each skeleton in the group is independent and kicks off when the skeleton mounts. In the after case, the animation is controlled in a group so no matter when any skeleton is mounted within that group, its animation is kept in sync with the rest of the group.
