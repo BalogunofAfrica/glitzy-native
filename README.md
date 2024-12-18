@@ -118,7 +118,8 @@ export default function Placeholder() {
 
 ### Examples
 
-See the playground section to experiment :
+See the [example app](./example/ "sample app") to experiment:
+
 **1** - Changing the direction of the animation (animationDirection prop) :
 
 <p align="center">
@@ -187,7 +188,7 @@ export default function Placeholder() {
 
 **4** - Syncing skeleton animations in groups
 
-Say we have a group of Glitzy Skeletons that we want to visually keep their animation in sync, no matter when any of them mounts, we can wrap these skeletons as children of `Glitzy.Group`
+Say we have a group of Glitzy Skeletons that we want to visually keep their animation in sync no matter when any of them mounts, we can wrap these skeletons as children of `Glitzy.Group`
 
 Before:
 
