@@ -201,7 +201,7 @@ export default function Placeholder() {
             children: [
               //  ...
             ],
-            width: 248,
+            width: 200,
           },
           // ...
         ]}
@@ -214,7 +214,7 @@ export default function Placeholder() {
             children: [
               //  ...
             ],
-            width: 248,
+            width: 200,
           },
           // ...
         ]}
@@ -238,7 +238,7 @@ export default function Placeholder() {
             children: [
               //  ...
             ],
-            width: 248,
+            width: 200,
           },
           // ...
         ]}
@@ -251,7 +251,7 @@ export default function Placeholder() {
             children: [
               //  ...
             ],
-            width: 248,
+            width: 200,
           },
           // ...
         ]}
