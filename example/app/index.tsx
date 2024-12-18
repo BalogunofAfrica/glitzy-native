@@ -1,7 +1,7 @@
 import { Link, Stack } from "expo-router";
 import { Button, View } from "react-native";
 
-const c = [
+const demos = [
   {
     name: "Expo 🖇️",
     href: "/expo",
@@ -24,19 +24,19 @@ export default function Index() {
       }}
     >
       <Stack.Screen options={{ headerTitle: "Glitzy Native ✨" }} />
-      {c.map((node) => (
+      {demos.map((demo) => (
         <Link
           asChild
           style={{ padding: 16, paddingHorizontal: 8, borderTopWidth: 1 }}
           href={{
-            pathname: node.href,
+            pathname: demo.href,
             params: {
-              name: node.name,
+              name: demo.name,
             },
           }}
-          key={node.href}
+          key={demo.href}
         >
-          <Button title={node.name} />
+          <Button title={demo.name} />
         </Link>
       ))}
     </View>
