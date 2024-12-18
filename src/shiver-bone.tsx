@@ -140,7 +140,13 @@ export function ShiverBone({
       default:
         return {};
     }
-  });
+  }, [
+    animationDirection,
+    animationValue,
+    boneHeight,
+    boneWidth,
+    positionRange,
+  ]);
 
   return (
     <LeanView

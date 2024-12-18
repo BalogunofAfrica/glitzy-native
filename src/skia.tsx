@@ -5,7 +5,7 @@ import type { GlitzyImplProps, GradientProps } from "./types";
 import { useLayout } from "./helpers";
 
 const Gradient = (props: GradientProps) => {
-  const [size, onLayout] = useLayout(true);
+  const [size, onLayout] = useLayout();
 
   return (
     <Canvas onLayout={onLayout} style={props.style}>

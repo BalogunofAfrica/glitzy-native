@@ -23,7 +23,7 @@ export function StaticBone({
     );
 
     return { backgroundColor };
-  });
+  }, [animationType, animationValue, boneColor, highlightColor]);
 
   return (
     <AnimatedLeanView
