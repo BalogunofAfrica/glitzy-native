@@ -1,7 +1,7 @@
 {
   "name": "glitzy-native",
   "version": "0.0.1",
-  "description": "A simple and fully customizable implementation of a shimmer placeholder for React Native",
+  "description": "A simple and fully customizable implementation of a skeleton placeholder for React Native",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [

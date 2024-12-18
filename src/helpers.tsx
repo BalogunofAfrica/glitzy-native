@@ -94,16 +94,20 @@ export const getGradientEndDirection = (
   return direction;
 };
 
-export const useLayout = () => {
-  const [size] = useState({ width: 0, height: 0 });
+export const useLayout = (reactive?: boolean) => {
+  const [size, setSize] = useState({ width: 0, height: 0 });
 
   const onLayout = useCallback(
     (event: LayoutChangeEvent) => {
-      const { width, height } = event.nativeEvent.layout;
-      size.width = width;
-      size.height = height;
+      const { height, width } = event.nativeEvent.layout;
+      if (reactive) {
+        setSize({ height, width });
+      } else {
+        size.height = height;
+        size.width = width;
+      }
     },
-    [size]
+    [reactive, size]
   );
 
   return [size, onLayout] as const;

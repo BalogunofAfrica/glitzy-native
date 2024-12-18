@@ -53,14 +53,13 @@ export interface Direction {
 }
 
 export interface ShiverBoneProps
-  extends Pick<
-    GlitzyProps,
-    | "animationDirection"
-    | "animationType"
-    | "boneColor"
-    | "highlightColor"
-    | "LinearGradientComponent"
+  extends Required<
+    Pick<
+      GlitzyProps,
+      "animationDirection" | "animationType" | "boneColor" | "highlightColor"
+    >
   > {
+  LinearGradientComponent?: GlitzyProps["LinearGradientComponent"];
   animationValue: SharedValue<number>;
   boneHeight: number;
   boneWidth: number;
