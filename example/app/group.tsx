@@ -2,12 +2,12 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import { Glitzy } from "glitzy-native/lib/expo";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { Skeleton } from "./expo";
 
-const skeletons = Array.from({ length: 5 }, (_, index) => index.toString());
+const skeletons = Array.from({ length: 3 }, (_, index) => index.toString());
 
 export default function Group() {
   const params = useLocalSearchParams<{ name: string }>();
-  console.log("🚀 ~ Group ~ params:", params);
   const [visibility, setVisibility] = useState(skeletons.map(() => true));
 
   useEffect(() => {
@@ -80,52 +80,5 @@ export default function Group() {
         </View>
       </View>
     </View>
-  );
-}
-
-function Skeleton() {
-  return (
-    <Glitzy
-      isLoading
-      highlightColor="#d5d5d5"
-      boneColor="#F8F8F8"
-      layout={[
-        {
-          children: [
-            {
-              alignSelf: "center",
-              borderColor: "#F0F2F9",
-              borderRadius: 12,
-              borderWidth: 1,
-              children: [
-                {
-                  alignSelf: "center",
-                  borderRadius: 16,
-                  height: 32,
-                  key: "image",
-                  width: 32,
-                },
-                {
-                  alignItems: "center",
-                  children: [
-                    {
-                      borderRadius: 4,
-                      height: 18,
-                      width: 109,
-                    },
-                  ],
-                  rowGap: 10,
-                },
-              ],
-
-              justifyContent: "space-between",
-              padding: 16,
-              rowGap: 16,
-            },
-          ],
-          width: 248,
-        },
-      ]}
-    />
   );
 }
