@@ -1,11 +1,4 @@
-import {
-  createContext,
-  memo,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-} from "react";
+import { createContext, memo, useCallback, useContext, useRef } from "react";
 import {
   type SharedValue,
   cancelAnimation,
@@ -47,41 +40,30 @@ export const GlitzyGroup = memo(
     duration = DEFAULT_DURATION,
     easing = DEFAULT_EASING,
   }: GlitzyGroupProps) => {
-    const listenerCount = useRef(0);
-    const [hasListeners, setHasListeners] = useState(false);
+    const listeners = useRef(new Set<symbol>());
     const animationValue = useSharedValue(0);
 
-    const subscribe = useCallback(() => {
-      const prevCount = listenerCount.current;
-      listenerCount.current += 1;
+    const startAnimation = useCallback(() => {
+      animationValue.value = 0;
+      animationValue.value = ANIMATIONS[animationType]({ duration, easing });
+    }, [animationType, duration, easing, animationValue]);
 
-      // There is at least one listener
-      if (prevCount === 0) {
-        setHasListeners(true);
+    const subscribe = useCallback(() => {
+      const id = Symbol();
+      const wasEmpty = listeners.current.size === 0;
+      listeners.current.add(id);
+
+      if (wasEmpty) {
+        startAnimation();
       }
 
       return () => {
-        listenerCount.current -= 1;
-
-        // There are no more listeners
-        if (listenerCount.current === 0) {
-          setHasListeners(false);
+        listeners.current.delete(id);
+        if (listeners.current.size === 0) {
+          cancelAnimation(animationValue);
         }
       };
-    }, []);
-
-    useEffectOnce(() => {
-      const startAnimation = () => {
-        animationValue.value = 0;
-        animationValue.value = ANIMATIONS[animationType]({ duration, easing });
-      };
-
-      if (hasListeners) {
-        startAnimation();
-      } else {
-        cancelAnimation(animationValue);
-      }
-    }, [animationType, duration, easing, animationValue, hasListeners]);
+    }, [startAnimation, animationValue]);
 
     return (
       <GroupContext.Provider
