@@ -1,4 +1,11 @@
-import { createContext, memo, useCallback, useContext, useRef } from "react";
+import {
+  createContext,
+  memo,
+  useCallback,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import {
   type SharedValue,
   cancelAnimation,
@@ -40,30 +47,39 @@ export const GlitzyGroup = memo(
     duration = DEFAULT_DURATION,
     easing = DEFAULT_EASING,
   }: GlitzyGroupProps) => {
-    const listeners = useRef(new Set<symbol>());
+    const subscribers = useRef(new Set<symbol>());
+    const [hasListeners, setHasListeners] = useState(false);
     const animationValue = useSharedValue(0);
-
-    const startAnimation = useCallback(() => {
-      animationValue.value = 0;
-      animationValue.value = ANIMATIONS[animationType]({ duration, easing });
-    }, [animationType, duration, easing, animationValue]);
 
     const subscribe = useCallback(() => {
       const id = Symbol();
-      const wasEmpty = listeners.current.size === 0;
-      listeners.current.add(id);
+      const wasEmpty = subscribers.current.size === 0;
+      subscribers.current.add(id);
 
       if (wasEmpty) {
-        startAnimation();
+        setHasListeners(true);
       }
 
       return () => {
-        listeners.current.delete(id);
-        if (listeners.current.size === 0) {
-          cancelAnimation(animationValue);
+        subscribers.current.delete(id);
+        if (subscribers.current.size === 0) {
+          setHasListeners(false);
         }
       };
-    }, [startAnimation, animationValue]);
+    }, []);
+
+    useEffectOnce(() => {
+      const startAnimation = () => {
+        animationValue.value = 0;
+        animationValue.value = ANIMATIONS[animationType]({ duration, easing });
+      };
+
+      if (hasListeners) {
+        startAnimation();
+      } else {
+        cancelAnimation(animationValue);
+      }
+    }, [animationType, duration, easing, animationValue, hasListeners]);
 
     return (
       <GroupContext.Provider
