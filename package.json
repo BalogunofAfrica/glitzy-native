@@ -2,10 +2,11 @@
   "name": "glitzy-native",
   "version": "0.1.0",
   "description": "A simple and fully customizable implementation of a skeleton placeholder for React Native",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
-    "lib/**/*"
+    "*.js",
+    "*.d.ts"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
