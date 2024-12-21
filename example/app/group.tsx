@@ -1,5 +1,5 @@
 import { Stack, useLocalSearchParams } from "expo-router";
-import { Glitzy } from "glitzy-native/lib/expo";
+import { Glitzy } from "glitzy-native/expo";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { Skeleton } from "./expo";

@@ -1,6 +1,6 @@
 import { Stack, useLocalSearchParams } from "expo-router";
-import { Glitzy } from "glitzy-native/lib/expo";
-import type { GlitzyProps } from "glitzy-native/lib/types";
+import { Glitzy } from "glitzy-native/expo";
+import type { GlitzyProps } from "glitzy-native/types";
 import { ScrollView, Text, View } from "react-native";
 
 export default function Expo() {
