@@ -50,7 +50,7 @@ export const GlitzyGroup = memo(
     easing = DEFAULT_EASING,
   }: GlitzyGroupProps) => {
     const subscribers = useRef(new Set<symbol>());
-    const [hasListeners, setHasListeners] = useState(false);
+    const [shouldAnimate, setShouldAnimate] = useState(false);
     const animationValue = useSharedValue(0);
 
     const subscribe = useCallback(() => {
@@ -59,13 +59,13 @@ export const GlitzyGroup = memo(
       subscribers.current.add(id);
 
       if (wasEmpty) {
-        setHasListeners(true);
+        setShouldAnimate(true);
       }
 
       return () => {
         subscribers.current.delete(id);
         if (subscribers.current.size === 0) {
-          setHasListeners(false);
+          setShouldAnimate(false);
         }
       };
     }, []);
@@ -76,12 +76,12 @@ export const GlitzyGroup = memo(
         animationValue.value = ANIMATIONS[animationType]({ duration, easing });
       };
 
-      if (hasListeners) {
+      if (shouldAnimate) {
         startAnimation();
       } else {
         cancelAnimation(animationValue);
       }
-    }, [animationType, duration, easing, animationValue, hasListeners]);
+    }, [animationType, duration, easing, animationValue, shouldAnimate]);
 
     return (
       <GroupContext.Provider
