@@ -14,10 +14,5 @@
     "esModuleInterop": true
   },
   "include": ["./src"],
-  "exclude": [
-    "**/node_modules/**",
-    "**/lib/**",
-    "**/coverage/**",
-    "**/demos/**"
-  ]
+  "exclude": ["**/node_modules/**", "**/coverage/**", "**/demos/**"]
 }
