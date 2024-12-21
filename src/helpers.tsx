@@ -112,7 +112,6 @@ const isFunction = (value: unknown) =>
 // https://github.com/LegendApp/legend-state/blob/main/src/react/useEffectOnce.ts
 
 export function useEffectOnce(
-  // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
   effect: () => void | (() => void),
   deps: unknown[]
 ) {
@@ -121,14 +120,12 @@ export function useEffectOnce(
     process.env.NODE_ENV === "test"
   ) {
     const refDispose = useRef<{
-      // biome-ignore lint/suspicious/noConfusingVoidType: <explanation>
       dispose?: void | (() => void);
       num: number;
     }>({
       num: 0,
     });
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
       // This is a hack to work around StrictMode running effects twice.
       // On the first run it returns a cleanup function that queues the dispose function
