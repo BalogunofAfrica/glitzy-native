@@ -54,11 +54,17 @@ yarn add react-native-reanimated
 
 ### Usage
 
-This package gives you the flexibility of providing your own linear gradient implementation based on your project, all you need to do is to pass the implementation via the `LinearGradientComponent` prop. There are implementation files for common gradient packages like [expo](https://docs.expo.dev/versions/latest/sdk/linear-gradient/ "expo linear gradient"), [skia](https://shopify.github.io/react-native-skia/docs/shaders/gradients/#linear-gradient "skia linear gradient component") and [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "react native linear gradient").
+This package exposes three different `animationType`: **shiver**, **pulse** and **none**. If you want to use the shiver `animationType` you would need to have a gradient package or implementation.
 
-1.  Import glitzy-native:
+You have the flexibility of providing your own linear gradient implementation based on your project, all you need to do is to pass the implementation via the `LinearGradientComponent` prop. There are implementation files for common gradient packages like [expo](https://docs.expo.dev/versions/latest/sdk/linear-gradient/ "expo linear gradient"), [skia](https://shopify.github.io/react-native-skia/docs/shaders/gradients/#linear-gradient "skia linear gradient component") and [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "react native linear gradient").
 
-Import based on linear gradient implementation
+#### 1. Import glitzy-native:
+
+```tsx
+import { Glitzy } from "glitzy-native";
+```
+
+For **shiver** animation, you can import based on the default linear gradient implementations ⬇️
 
 If you use expo workflow, install `expo-linear-gradient` and import like so:
 
@@ -89,7 +95,7 @@ const Gradient = /* Your gradient implementation **/
 ...
 ```
 
-2.  Once you create the Skeleton, you have two options:
+#### 2. Once you create the Skeleton, you have two options:
 
 - **Child Layout** : The component will figure out the layout of its bones with the dimensions of its direct children.
 - **Custom Layout** : You provide a prop `layout` to the component specifying the size of the bones (see the [Examples](#examples) section below). Herunder is the example with a custom layout. A key prop is optional but highly recommended.
@@ -112,7 +118,7 @@ export default function Placeholder() {
 }
 ```
 
-3.  Then simply sync the prop `isLoading` to your state to show/hide the Skeleton when the assets/data are available to the user.
+#### 3. Then simply sync the prop `isLoading` to your state to show/hide the Skeleton when the assets/data are available to the user.
 
 ```tsx
 export default function Placeholder() {
@@ -129,18 +135,18 @@ export default function Placeholder() {
 
 ### Props
 
-| Name                    | Type             | Default                           | Description                                                                                                                       |
-| ----------------------- | ---------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| isLoading               | bool             | **required**                      | Shows the skeleton bones when true                                                                                                |
-| LinearGradientComponent | ReactComponent   | **required** for shiver animation | The gradient implementation to use for the "shiver" animation                                                                     |
-| layout                  | array of objects | []                                | A custom layout for the skeleton bones                                                                                            |
-| duration                | number           | 1200 ms                           | Duration of one cycle of animation                                                                                                |
-| containerStyle          | object           | flex: 1                           | The style applied to the View containing the bones                                                                                |
-| easing                  | Easing           | bezier(0.5, 0, 0.25, 1)           | Easing of the bones animation                                                                                                     |
-| animationType           | string           | "shiver"                          | The animation to be used for animating the bones (see demos below)                                                                |
-| animationDirection      | string           | "horizontalRight"                 | Used only for shiver animation, describes the direction and end-point (ex: horizontalRight goes on the x-axis from left to right) |
-| boneColor               | string           | "#E1E9EE"                         | Color of the bones                                                                                                                |
-| highlightColor          | string           | "#F2F8FC"                         | Color of the highlight of the bones                                                                                               |
+| Name                    | Type             | Default                                             | Description                                                                                                                       |
+| ----------------------- | ---------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| isLoading               | bool             | **required**                                        | Shows the skeleton bones when true                                                                                                |
+| LinearGradientComponent | ReactComponent   | **required** for shiver animation                   | The gradient implementation to use for the "shiver" animation                                                                     |
+| layout                  | array of objects | []                                                  | A custom layout for the skeleton bones                                                                                            |
+| duration                | number           | 1200 ms                                             | Duration of one cycle of animation                                                                                                |
+| containerStyle          | object           | flex: 1                                             | The style applied to the View containing the bones                                                                                |
+| easing                  | Easing           | bezier(0.5, 0, 0.25, 1)                             | Easing of the bones animation                                                                                                     |
+| animationType           | string           | "shiver"                                            | The animation to be used for animating the bones (see demos below)                                                                |
+| animationDirection      | string           | "horizontalRight" **only for shiver animationType** | Used only for shiver animation, describes the direction and end-point (ex: horizontalRight goes on the x-axis from left to right) |
+| boneColor               | string           | "#E1E9EE"                                           | Color of the bones                                                                                                                |
+| highlightColor          | string           | "#F2F8FC"                                           | Color of the highlight of the bones                                                                                               |
 
 ### Examples
 
