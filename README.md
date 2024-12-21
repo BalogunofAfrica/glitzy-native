@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="/">
-      <img width="400px" height="400px" alt="Glitzy Native ✨" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/refactor-package/docs/glitzy.png" />
+      <img width="400px" height="400px" alt="Glitzy Native ✨" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/master/docs/glitzy.png" />
   </a>
 </p>
 
@@ -54,12 +54,39 @@ yarn add react-native-reanimated
 
 ### Usage
 
-This package gives you the flexibility of providing your own linear gradient implementation based on your project, all you need to do is to pass the implementation via the `LinearGradientComponent` prop. There are implementation files for common gradient packages like [expo](https://docs.expo.dev/versions/latest/sdk/linear-gradient/ "expo linear gradient"), [skia](https://shopify.github.io/react-native-skia/docs/shaders/gradients/#linear-gradient "skia linear gradient component") and [react-native-linear-gradient ](https://www.npmjs.com/package/react-native-linear-gradient "react native linear gradient").
+This package gives you the flexibility of providing your own linear gradient implementation based on your project, all you need to do is to pass the implementation via the `LinearGradientComponent` prop. There are implementation files for common gradient packages like [expo](https://docs.expo.dev/versions/latest/sdk/linear-gradient/ "expo linear gradient"), [skia](https://shopify.github.io/react-native-skia/docs/shaders/gradients/#linear-gradient "skia linear gradient component") and [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "react native linear gradient").
 
 1.  Import glitzy-native:
 
+Import based on linear gradient implementation
+
+If you use expo workflow, install `expo-linear-gradient` and import like so:
+
 ```ts
-import { Glitzy } from "glitzy-native/lib/default";
+import { Glitzy } from "glitzy-native/expo";
+```
+
+If you prefer to use `@shopify/react-native-skia`:
+
+```ts
+import { Glitzy } from "glitzy-native/skia";
+```
+
+If you prefer to use `react-native-linear-gradient`:
+
+```ts
+import { Glitzy } from "glitzy-native/native";
+```
+
+OR you can just provide your own gradient implementation and use it like so:
+
+```tsx
+import { Glitzy } from "glitzy-native";
+...
+const Gradient = /* Your gradient implementation **/
+...
+  <Glitzy LinearGradientComponent={Gradient} {...props} />
+...
 ```
 
 2.  Once you create the Skeleton, you have two options:
@@ -264,7 +291,7 @@ export default function Placeholder() {
 ```
 
 <p align="center">
-<img  width="300px" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/refactor-package/docs/comparison-group.gif" />
+<img  width="300px" src="https://raw.githubusercontent.com/BalogunofAfrica/glitzy-native/master/docs/comparison-group.gif" />
 </p>
 
 In the before case (without group), the animation of each skeleton in the group is independent and kicks off when the skeleton mounts. In the after case (with group), the animation is controlled in a group so no matter when any skeleton is mounted within that group, its animation is kept in sync with the rest of the group.
