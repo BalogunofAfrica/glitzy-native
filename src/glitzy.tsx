@@ -32,7 +32,7 @@ export function Glitzy({
   duration = DEFAULT_DURATION,
   layout = [],
   animationType: singleAnimationType = DEFAULT_ANIMATION_TYPE,
-  animationDirection = DEFAULT_ANIMATION_DIRECTION,
+  animationDirection: singleAnimationDirection = DEFAULT_ANIMATION_DIRECTION,
   isLoading = DEFAULT_LOADING,
   boneColor = DEFAULT_BONE_COLOR,
   highlightColor = DEFAULT_HIGHLIGHT_COLOR,
@@ -50,6 +50,13 @@ export function Glitzy({
 
     return singleAnimationType;
   }, [group, singleAnimationType]);
+  const animationDirection = useMemo(() => {
+    if (group?.animationDirection) {
+      return group.animationDirection;
+    }
+
+    return singleAnimationDirection;
+  }, [group, singleAnimationDirection]);
 
   useEffectOnce(() => {
     if (group !== null) return;

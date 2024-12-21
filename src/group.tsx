@@ -21,6 +21,7 @@ import { useEffectOnce } from "./helpers";
 import type { GlitzyGroupProps, GlitzyProps } from "./types";
 
 type GroupContext = {
+  animationDirection?: NonNullable<GlitzyProps["animationDirection"]>;
   animationType: NonNullable<GlitzyProps["animationType"]>;
   animationValue: SharedValue<number>;
   subscribe: () => () => void;
@@ -42,6 +43,7 @@ export function useGroup() {
 
 export const GlitzyGroup = memo(
   ({
+    animationDirection,
     animationType = DEFAULT_ANIMATION_TYPE,
     children,
     duration = DEFAULT_DURATION,
@@ -83,7 +85,7 @@ export const GlitzyGroup = memo(
 
     return (
       <GroupContext.Provider
-        value={{ animationType, animationValue, subscribe }}
+        value={{ animationDirection, animationType, animationValue, subscribe }}
       >
         {children}
       </GroupContext.Provider>
