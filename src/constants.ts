@@ -32,6 +32,5 @@ export const ANIMATIONS = {
     withRepeat(withTiming(1, config), -1, false),
 } as const satisfies Record<
   AnimationType,
-  // biome-ignore lint/suspicious/noExplicitAny:
   (...props: any[]) => AnimatableValue | number
 >;

@@ -41,7 +41,10 @@ export interface GlitzyProps
 
 export interface GlitzyGroupProps
   extends PropsWithChildren<
-    Pick<GlitzyProps, "animationType" | "duration" | "easing">
+    Pick<
+      GlitzyProps,
+      "animationDirection" | "animationType" | "duration" | "easing"
+    >
   > {}
 
 export interface GlitzyImplProps
