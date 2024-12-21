@@ -21,7 +21,7 @@ import { useEffectOnce } from "./helpers";
 import type { GlitzyGroupProps, GlitzyProps } from "./types";
 
 type GroupContext = {
-  animationDirection?: NonNullable<GlitzyProps["animationDirection"]>;
+  animationDirection?: GlitzyProps["animationDirection"];
   animationType: NonNullable<GlitzyProps["animationType"]>;
   animationValue: SharedValue<number>;
   subscribe: () => () => void;
