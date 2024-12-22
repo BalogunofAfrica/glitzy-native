@@ -14,6 +14,10 @@ const demos = [
     name: "Group 🧑‍🧑‍🧒‍🧒",
     href: "/group",
   },
+  {
+    name: "Declarative API 🖋️",
+    href: "/declarative",
+  },
 ] as const;
 
 export default function Index() {

@@ -1,3 +1,4 @@
+import type { Glitzy as NGlitzy } from "glitzy-native/expo";
 import type { GlitzyImplProps } from "glitzy-native/types";
 
 export function Skeleton({
@@ -9,7 +10,7 @@ export function Skeleton({
   ...rest
 }: Omit<GlitzyImplProps, "isLoading"> & {
   bg?: string;
-  Glitzy: (props: GlitzyImplProps) => JSX.Element;
+  Glitzy: typeof NGlitzy;
 }) {
   return (
     <Glitzy
