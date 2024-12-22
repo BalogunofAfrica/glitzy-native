@@ -29,7 +29,7 @@ export default function Index() {
           asChild
           style={{ padding: 16, paddingHorizontal: 8, borderTopWidth: 1 }}
           href={{
-            pathname: demo.href,
+            pathname: demo.href as any,
             params: {
               name: demo.name,
             },
