@@ -1,8 +1,8 @@
+import { Skeleton } from "@/component/skeleton-declarative";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Glitzy } from "glitzy-native/expo";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
-import { Skeleton } from "./expo";
 
 const skeletons = Array.from({ length: 3 }, (_, index) => index.toString());
 
@@ -47,10 +47,10 @@ export default function Group() {
           >
             Without Group
           </Text>
-          {skeletons.map((sk, index) => {
+          {skeletons.map((node, index) => {
             const visible = visibility[index];
 
-            return visible ? <Skeleton key={sk} /> : null;
+            return visible ? <Skeleton Glitzy={Glitzy} key={node} /> : null;
           })}
         </View>
         <View
@@ -71,10 +71,10 @@ export default function Group() {
             With Group
           </Text>
           <Glitzy.Group animationType="shiver">
-            {skeletons.map((sk, index) => {
+            {skeletons.map((node, index) => {
               const visible = visibility[index];
 
-              return visible ? <Skeleton key={sk} /> : null;
+              return visible ? <Skeleton Glitzy={Glitzy} key={node} /> : null;
             })}
           </Glitzy.Group>
         </View>

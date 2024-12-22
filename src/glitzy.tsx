@@ -1,5 +1,4 @@
-import type React from "react";
-import { Children, useCallback, useMemo } from "react";
+import { Children, type ReactNode, useCallback, useMemo } from "react";
 import type { ViewStyle } from "react-native";
 import { cancelAnimation, useSharedValue } from "react-native-reanimated";
 import {
@@ -14,10 +13,11 @@ import {
 } from "./constants";
 import { GlitzyGroup, useGroup } from "./group";
 import { useEffectOnce, useLayout } from "./helpers";
+import { Box, Circle, Text, createLayout } from "./layout";
 import { LeanView } from "./lean-view";
 import { ShiverBone } from "./shiver-bone";
 import { StaticBone } from "./static-bone";
-import type { CustomViewStyle, GlitzyProps } from "./types";
+import type { CustomViewStyle, GlitzyLayoutProps, GlitzyProps } from "./types";
 
 const container$ = {
   alignItems: "center",
@@ -151,7 +151,7 @@ export function Glitzy({
   const getBones = useCallback(
     (
       bonesLayout: CustomViewStyle[] | undefined,
-      childrenItems: React.ReactNode,
+      childrenItems: ReactNode,
       prefix: string | number = ""
     ): JSX.Element[] => {
       if (bonesLayout && bonesLayout.length > 0) {
@@ -203,10 +203,37 @@ export function Glitzy({
       return Children.map(
         childrenItems as React.ReactElement,
         (child, index) => {
-          const styling = child.props.style || {};
+          const styling = {
+            width: "100%",
+            height: "100%",
+            ...child.props?.style,
+            position: "absolute",
+          };
+
           if (animationType === "pulse" || animationType === "none") {
             return (
-              <StaticBone
+              <LeanView>
+                {child}
+                <StaticBone
+                  key={prefix ? `${prefix}_${index}` : index}
+                  animationDirection={animationDirection}
+                  animationType={animationType}
+                  animationValue={animationValue}
+                  boneColor={boneColor}
+                  boneHeight={getBoneHeight(styling)}
+                  boneWidth={getBoneWidth(styling)}
+                  highlightColor={highlightColor}
+                  layoutStyle={styling}
+                />
+              </LeanView>
+            );
+          }
+
+          return (
+            <LeanView>
+              {child}
+              <ShiverBone
+                LinearGradientComponent={LinearGradientComponent}
                 key={prefix ? `${prefix}_${index}` : index}
                 animationDirection={animationDirection}
                 animationType={animationType}
@@ -216,24 +243,9 @@ export function Glitzy({
                 boneWidth={getBoneWidth(styling)}
                 highlightColor={highlightColor}
                 layoutStyle={styling}
+                positionRange={getPositionRange(styling)}
               />
-            );
-          }
-
-          return (
-            <ShiverBone
-              LinearGradientComponent={LinearGradientComponent}
-              key={prefix ? `${prefix}_${index}` : index}
-              animationDirection={animationDirection}
-              animationType={animationType}
-              animationValue={animationValue}
-              boneColor={boneColor}
-              boneHeight={getBoneHeight(styling)}
-              boneWidth={getBoneWidth(styling)}
-              highlightColor={highlightColor}
-              layoutStyle={styling}
-              positionRange={getPositionRange(styling)}
-            />
+            </LeanView>
           );
         }
       );
@@ -260,3 +272,7 @@ export function Glitzy({
 }
 
 Glitzy.Group = GlitzyGroup;
+Glitzy.Layout = createLayout<GlitzyProps, GlitzyLayoutProps>(Glitzy);
+Glitzy.Box = Box;
+Glitzy.Circle = Circle;
+Glitzy.Text = Text;
