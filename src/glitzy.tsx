@@ -203,10 +203,37 @@ export function Glitzy({
       return Children.map(
         childrenItems as React.ReactElement,
         (child, index) => {
-          const styling = child.props.style || {};
+          const styling = {
+            width: "100%",
+            height: "100%",
+            ...child.props?.style,
+            position: "absolute",
+          };
+
           if (animationType === "pulse" || animationType === "none") {
             return (
-              <StaticBone
+              <LeanView>
+                {child}
+                <StaticBone
+                  key={prefix ? `${prefix}_${index}` : index}
+                  animationDirection={animationDirection}
+                  animationType={animationType}
+                  animationValue={animationValue}
+                  boneColor={boneColor}
+                  boneHeight={getBoneHeight(styling)}
+                  boneWidth={getBoneWidth(styling)}
+                  highlightColor={highlightColor}
+                  layoutStyle={styling}
+                />
+              </LeanView>
+            );
+          }
+
+          return (
+            <LeanView>
+              {child}
+              <ShiverBone
+                LinearGradientComponent={LinearGradientComponent}
                 key={prefix ? `${prefix}_${index}` : index}
                 animationDirection={animationDirection}
                 animationType={animationType}
@@ -216,24 +243,9 @@ export function Glitzy({
                 boneWidth={getBoneWidth(styling)}
                 highlightColor={highlightColor}
                 layoutStyle={styling}
+                positionRange={getPositionRange(styling)}
               />
-            );
-          }
-
-          return (
-            <ShiverBone
-              LinearGradientComponent={LinearGradientComponent}
-              key={prefix ? `${prefix}_${index}` : index}
-              animationDirection={animationDirection}
-              animationType={animationType}
-              animationValue={animationValue}
-              boneColor={boneColor}
-              boneHeight={getBoneHeight(styling)}
-              boneWidth={getBoneWidth(styling)}
-              highlightColor={highlightColor}
-              layoutStyle={styling}
-              positionRange={getPositionRange(styling)}
-            />
+            </LeanView>
           );
         }
       );
