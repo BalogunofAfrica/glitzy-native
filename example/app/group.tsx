@@ -1,4 +1,4 @@
-import { Skeleton } from "@/component/skeleton";
+import { Skeleton } from "@/component/skeleton-declarative";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { Glitzy } from "glitzy-native/expo";
 import { useEffect, useState } from "react";

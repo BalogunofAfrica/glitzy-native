@@ -11,12 +11,12 @@ const demos = [
     href: "/skia",
   },
   {
-    name: "Group 🧑‍🧑‍🧒‍🧒",
-    href: "/group",
-  },
-  {
     name: "Declarative API 🖋️",
     href: "/declarative",
+  },
+  {
+    name: "Group 🧑‍🧑‍🧒‍🧒",
+    href: "/group",
   },
 ] as const;
 
