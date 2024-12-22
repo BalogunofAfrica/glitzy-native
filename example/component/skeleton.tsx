@@ -1,58 +1,15 @@
-import { Stack, useLocalSearchParams } from "expo-router";
-import { Glitzy, type GlitzyProps } from "glitzy-native/expo";
-import { ScrollView, Text, View } from "react-native";
-
-export default function Expo() {
-  const params = useLocalSearchParams<{ name: string }>();
-
-  return (
-    <ScrollView style={{ backgroundColor: "white", flexGrow: 1 }}>
-      <Stack.Screen options={{ title: params.name }} />
-      <View
-        style={{
-          rowGap: 16,
-          marginBottom: 100,
-          marginTop: 32,
-        }}
-      >
-        <View style={{ rowGap: 8, alignItems: "center" }}>
-          <Text>Animation type: shiver (default)</Text>
-          <Skeleton />
-        </View>
-        <View style={{ rowGap: 8, alignItems: "center" }}>
-          <Text>Animation type: pulse</Text>
-          <Skeleton animationType="pulse" />
-        </View>
-        <View style={{ rowGap: 8, alignItems: "center" }}>
-          <Text>Animation type: none</Text>
-          <Skeleton boneColor="#d5d5d5" animationType="none" />
-        </View>
-        <View style={{ rowGap: 8, alignItems: "center" }}>
-          <Text>Change bone and highlight color</Text>
-          <Skeleton bg="#111111" boneColor="#777777" highlightColor="#333333" />
-        </View>
-        <View style={{ rowGap: 8, alignItems: "center" }}>
-          <Text>Change animation direction</Text>
-          <Skeleton
-            animationDirection="verticalDown"
-            bg="#111111"
-            boneColor="#777777"
-            highlightColor="#333333"
-          />
-        </View>
-      </View>
-    </ScrollView>
-  );
-}
+import type { GlitzyImplProps } from "glitzy-native/types";
 
 export function Skeleton({
   animationType = "shiver",
   bg,
   boneColor = "#F8F8F8",
   highlightColor = "#d5d5d5",
+  Glitzy,
   ...rest
-}: Omit<GlitzyProps, "isLoading"> & {
+}: Omit<GlitzyImplProps, "isLoading"> & {
   bg?: string;
+  Glitzy: (props: GlitzyImplProps) => JSX.Element;
 }) {
   return (
     <Glitzy
