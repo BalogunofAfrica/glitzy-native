@@ -56,7 +56,7 @@ export function createLayout<
 
     return (
       <Glitzy {...(props as any)} layout={layout}>
-        {props.renderChildren}
+        {props.renderContent}
       </Glitzy>
     );
   };

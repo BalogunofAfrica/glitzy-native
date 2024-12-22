@@ -40,7 +40,7 @@ export interface GlitzyProps
   }> {}
 
 export interface GlitzyLayoutProps extends Omit<GlitzyProps, "layout"> {
-  renderChildren?: GlitzyImplProps["children"];
+  renderContent?: GlitzyImplProps["children"];
 }
 
 export interface GlitzyGroupProps
@@ -53,7 +53,7 @@ export interface GlitzyImplProps
   extends Omit<GlitzyProps, "LinearGradientComponent"> {}
 
 export interface GlitzyLayoutImplProps extends Omit<GlitzyImplProps, "layout"> {
-  renderChildren?: GlitzyImplProps["children"];
+  renderContent?: GlitzyImplProps["children"];
 }
 
 export interface Direction {
