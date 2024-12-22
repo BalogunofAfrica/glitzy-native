@@ -98,7 +98,7 @@ const Gradient = /* Your gradient implementation **/
 #### 2. Once you create the Skeleton, you have two options:
 
 - **Child Layout** : The component will figure out the layout of its bones with the dimensions of its direct children.
-- **Custom Layout** : You provide a prop `layout` to the component specifying the size of the bones (see the [Examples](#examples) section below). Herunder is the example with a custom layout. A key prop is optional but highly recommended.
+- **Custom Layout** : You provide a prop `layout` to the component specifying the size of the bones (see the [Examples](#examples) section below). Here is the example with a custom layout. A key prop is optional but highly recommended.
 
 ```tsx
 export default function Placeholder() {
@@ -198,7 +198,27 @@ export default function Placeholder() {
 <img width="300px" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/layout_change.gif" />
 </p>
 
+##### Declarative:
+
 ```tsx
+// Declarative:
+export default function Placeholder() {
+  return (
+    <Glitzy.Layout
+      containerStyle={{ flex: 1, width: 300 }}
+      animationDirection="horizontalLeft"
+      isLoading={true}
+      // ...
+    >
+      {/** long line */}
+      <Glitzy.Box width={220} height={20} marginBottom={6} />
+      {/** short line */}
+      <Glitzy.Box width={180} height={20} marginBottom={6} />
+    </Glitzy.Layout>
+  );
+}
+
+// Imperative:
 export default function Placeholder() {
   return (
     <Glitzy
@@ -228,20 +248,13 @@ Before:
 export default function Placeholder() {
   return (
     <>
-      <Glitzy
-        layout={[
-          {
-            children: [
-              //  ...
-            ],
-            width: 200,
-          },
-          // ...
-        ]}
+      <Glitzy.Layout
         isLoading={true}
         // ...
-      />
-      <Glitzy
+      >
+        <Glitzy.Box width={200}>{/** ... */}</Glitzy.Box>
+      </Glitzy.Layout>
+      <Glitzy.Layout
         layout={[
           {
             children: [
@@ -265,20 +278,13 @@ After:
 export default function Placeholder() {
   return (
     <Glitzy.Group>
-      <Glitzy
-        layout={[
-          {
-            children: [
-              //  ...
-            ],
-            width: 200,
-          },
-          // ...
-        ]}
+      <Glitzy.Layout
         isLoading={true}
         // ...
-      />
-      <Glitzy
+      >
+        <Glitzy.Box width={200}>{/** ... */}</Glitzy.Box>
+      </Glitzy.Layout>
+      <Glitzy.Layout
         layout={[
           {
             children: [
