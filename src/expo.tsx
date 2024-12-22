@@ -6,7 +6,7 @@ import { createLayout, Box, Circle, Text } from "./layout";
 export * from "./index";
 export {
   GlitzyImplProps as GlitzyProps,
-  GlitzyImplLayoutProps as GlitzyLayoutProps,
+  GlitzyLayoutImplProps as GlitzyLayoutProps,
 } from "./types";
 
 const Gradient = (props: GradientProps) => <LinearGradient {...props} />;

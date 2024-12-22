@@ -39,7 +39,9 @@ export interface GlitzyProps
     layout?: CustomViewStyle[];
   }> {}
 
-export interface GlitzyLayoutProps extends Omit<GlitzyProps, "layout"> {}
+export interface GlitzyLayoutProps extends Omit<GlitzyProps, "layout"> {
+  renderChildren?: GlitzyImplProps["children"];
+}
 
 export interface GlitzyGroupProps
   extends Pick<
@@ -50,8 +52,9 @@ export interface GlitzyGroupProps
 export interface GlitzyImplProps
   extends Omit<GlitzyProps, "LinearGradientComponent"> {}
 
-export interface GlitzyImplLayoutProps
-  extends Omit<GlitzyImplProps, "layout"> {}
+export interface GlitzyLayoutImplProps extends Omit<GlitzyImplProps, "layout"> {
+  renderChildren?: GlitzyImplProps["children"];
+}
 
 export interface Direction {
   x: number;

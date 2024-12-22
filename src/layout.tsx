@@ -2,7 +2,7 @@ import { Children, type PropsWithChildren } from "react";
 import type { ViewStyle } from "react-native";
 import type {
   CustomViewStyle,
-  GlitzyImplLayoutProps,
+  GlitzyLayoutImplProps,
   GlitzyImplProps,
 } from "./types";
 
@@ -14,7 +14,14 @@ const buildLayout = (children: any) => {
     ): CustomViewStyle => {
       const layoutStyle = (() => {
         // @ts-expect-error `__type` not known
-        switch (child.type.__type) {
+        const type = child.type?.__type;
+        if (!type) {
+          throw new Error(
+            `Only Layout components like "Box", "Circle" and "Text" can be used as its children`
+          );
+        }
+
+        switch (type) {
           case "LayoutBox":
             return getBoxStyle(child.props as any);
           case "LayoutCircle":
@@ -42,12 +49,16 @@ const buildLayout = (children: any) => {
 
 export function createLayout<
   G extends GlitzyImplProps = GlitzyImplProps,
-  T extends GlitzyImplLayoutProps = GlitzyImplLayoutProps
+  T extends GlitzyLayoutImplProps = GlitzyLayoutImplProps
 >(Glitzy: (props: G) => JSX.Element) {
   return function Layout(props: T & { children: React.ReactNode }) {
     const layout = buildLayout(props.children);
 
-    return <Glitzy {...(props as any)} layout={layout} />;
+    return (
+      <Glitzy {...(props as any)} layout={layout}>
+        {props.renderChildren}
+      </Glitzy>
+    );
   };
 }
 
