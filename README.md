@@ -7,7 +7,7 @@
 </p>
 
 > ℹ️ **Note**  
-> This was originally a fork of [react-native-skeleton-content-nonexpo](https://github.com/alexZajac/react-native-skeleton-content-nonexpo), which depends on the gradient implementation in [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "default gradient package"). It also resolves the issue with using Reanimated 2.0 and removes the hard requirement on Redash.
+> This was originally a fork of [react-native-skeleton-content-nonexpo](https://github.com/alexZajac/react-native-skeleton-content-nonexpo), which depends on the gradient implementation in [react-native-linear-gradient](https://www.npmjs.com/package/react-native-linear-gradient "default gradient package"). It also resolves the issue with using Reanimated >= v2.0.0 and removes the hard requirement on Redash.
 
 A simple and fully customizable implementation of a skeleton placeholder for React Native. Works on both iOS and Android.
 
