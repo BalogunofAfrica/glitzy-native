@@ -103,6 +103,26 @@ const Gradient = /* Your gradient implementation **/
 ```tsx
 export default function Placeholder() {
   return (
+    <Glitzy.Layout
+      containerStyle={{ flex: 1, width: 300 }}
+      isLoading={false}
+      renderContent={
+        <>
+          <Text style={styles.normalText}>Your content</Text>
+          <Text style={styles.bigText}>Other content</Text>
+        </>
+      }
+    >
+      <Glitzy.Box key="someId" width={220} height={20} marginBottom={6} />
+      <Glitzy.Box key="someOtherId" width={180} height={20} marginBottom={6} />
+    </Glitzy.Layout>
+  );
+}
+
+// OR
+
+export default function Placeholder() {
+  return (
     <Glitzy
       containerStyle={{ flex: 1, width: 300 }}
       isLoading={false}
@@ -192,13 +212,13 @@ export default function Placeholder() {
 }
 ```
 
-**3** - Customizing the layout of the bones (layout prop) :
+**3** - Customizing the layout of the bones :
 
 <p align="center">
 <img width="300px" src="https://raw.githubusercontent.com/alexZajac/react-native-skeleton-content/master/demos/layout_change.gif" />
 </p>
 
-##### Declarative:
+There are 2 ways to customize the layout of the bones, either using the declarative API (via layout components) or imperatively by building your layout.
 
 ```tsx
 // Declarative:
@@ -254,7 +274,7 @@ export default function Placeholder() {
       >
         <Glitzy.Box width={200}>{/** ... */}</Glitzy.Box>
       </Glitzy.Layout>
-      <Glitzy.Layout
+      <Glitzy
         layout={[
           {
             children: [
@@ -284,7 +304,7 @@ export default function Placeholder() {
       >
         <Glitzy.Box width={200}>{/** ... */}</Glitzy.Box>
       </Glitzy.Layout>
-      <Glitzy.Layout
+      <Glitzy
         layout={[
           {
             children: [
