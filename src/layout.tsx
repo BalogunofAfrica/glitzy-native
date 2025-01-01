@@ -82,7 +82,9 @@ function getCircleStyle({
   ...props
 }: CircleProps): CustomViewStyle {
   if (typeof size === "string" && !size.endsWith("%")) {
-    throw new Error("Radius percentage must end with %");
+    throw new Error(
+      "Circle size with string must be a percentage value e.g `10%`"
+    );
   }
 
   return {

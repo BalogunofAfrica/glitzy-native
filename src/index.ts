@@ -5,6 +5,7 @@ export {
   CustomViewStyle,
   Direction,
   GlitzyProps,
-  GradientProps,
   GlitzyGroupProps,
+  GlitzyLayoutProps,
+  GradientProps,
 } from "./types";

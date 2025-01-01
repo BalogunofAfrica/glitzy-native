@@ -31,7 +31,7 @@ export function ShiverBone({
   positionRange,
 }: ShiverBoneProps) {
   if (!LinearGradientComponent) {
-    throw new Error("Error: No 'LinearGradientComponent' was provided.");
+    throw new Error("No `LinearGradientComponent` was provided.");
   }
 
   const animatedStyle = useAnimatedStyle<any>(() => {
